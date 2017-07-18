@@ -1,0 +1,6 @@
+@ECHO OFF
+rem PowerShell.exe -Command "& '%~dpn0.ps1' \"UTS Test\" $true $false $false \"C:\Users\Bruce Pike Rice\Documents\Visual Studio 2015\Projects\JiraInteraction\JiraInteraction\UTS MSP Update Template.xlsm\" \"C:\temp\Trello Tasks UTS Test.xlsm\" \"C:\Program Files (x86)\Microsoft Office\root\Office16\WINPROJ.EXE\" \"\" "
+PowerShell.exe -Command "& '%~dpn0.ps1' \"UTS Test CTE\" $true $false $false \"C:\Users\Bruce Pike Rice\Documents\Visual Studio 2015\Projects\JiraInteraction\JiraInteraction\UTS MSP Update Template.xlsm\" \"C:\temp\Trello Tasks UTS Test CTE.xlsm\" \"C:\Program Files (x86)\Microsoft Office\root\Office16\WINPROJ.EXE\" \"\" "
+rem PowerShell.exe -Command "& '%~dpn0.ps1' \"UTS Test OSWeb\" $true $true $true \"C:\Users\Bruce Pike Rice\Documents\Visual Studio 2015\Projects\JiraInteraction\JiraInteraction\UTS MSP Update Template.xlsm\" \"C:\temp\Trello Tasks UTS Test OSWeb.xlsm\" \"C:\Program Files (x86)\Microsoft Office\root\Office16\WINPROJ.EXE\" \"Sprint Backlog 2017.02.24\" "
+rem PowerShell.exe -Command "& '%~dpn0.ps1' \"UTS Test Tutor\" $true $true $true \"C:\Users\Bruce Pike Rice\Documents\Visual Studio 2015\Projects\JiraInteraction\JiraInteraction\UTS MSP Update Template.xlsm\" \"C:\temp\Trello Tasks UTS Test Tutor.xlsm\" \"C:\Program Files (x86)\Microsoft Office\root\Office16\WINPROJ.EXE\" \"4A - IN-SPRINT TESTING\" "
+PAUSE
