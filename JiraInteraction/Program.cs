@@ -119,7 +119,7 @@ namespace MspUpdate
                     case "BruceP Rice":
                         UsrNmFnd = true;
                         CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\UTS\\UTS MSP Update\\UTS MSP Config.txt";
-                        XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Source\\Projects\\MSP Update\\JiraInteraction\\UTS MSP Update Template.xlsm";
+                        XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
                         XlsOutptDrctry = "c:\\temp\\";
                         MspExe = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINPROJ.EXE";
                         break;

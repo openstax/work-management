@@ -64,6 +64,7 @@ namespace MspUpdate
             string CrdId = "";
             DateTime CrdLstActvty;
             string CrdNm = "";
+            string CrdPrty = "";
             List<string> Crds = new List<string>();
             //int CntSctnLn = 0;
             string CrdUrl = "";
@@ -116,6 +117,7 @@ namespace MspUpdate
             BrdAssgnmnts.Columns.Add("BrdNm", typeof(string));
             BrdAssgnmnts.Columns.Add("Lst", typeof(string));
             BrdAssgnmnts.Columns.Add("CrdNm", typeof(string));
+            BrdAssgnmnts.Columns.Add("CrdPrty", typeof(string));
             BrdAssgnmnts.Columns.Add("Lbls", typeof(string));
             BrdAssgnmnts.Columns.Add("WrkPhsNm", typeof(string));
             BrdAssgnmnts.Columns.Add("TskNm", typeof(string));
@@ -212,30 +214,32 @@ namespace MspUpdate
             oShtTsks.Columns[20].ColumnWidth = 16;
             oShtTsks.Columns[21].ColumnWidth = 6;
             oShtTsks.Columns[22].ColumnWidth = 10;
-            oShtTsks.Columns[23].ColumnWidth = 6;
+            oShtTsks.Columns[23].ColumnWidth = 10;
+            oShtTsks.Columns[24].ColumnWidth = 10;
             oShtTsks.Cells[1, 1] = "Board Name";
             oShtTsks.Cells[1, 2] = "List Name";
             oShtTsks.Cells[1, 3] = "Card Name";
-            oShtTsks.Cells[1, 4] = "Workphase Name";
-            oShtTsks.Cells[1, 5] = "Task Name";
-            oShtTsks.Cells[1, 6] = "Assigned";
-            oShtTsks.Cells[1, 7] = "Hrs Actl";
-            oShtTsks.Cells[1, 8] = "Hrs Rmnng";
-            oShtTsks.Cells[1, 9] = "Role";
-            oShtTsks.Cells[1, 10] = "Labels";
-            oShtTsks.Cells[1, 11] = "EstmtO";
-            oShtTsks.Cells[1, 12] = "EstmtL";
-            oShtTsks.Cells[1, 13] = "EstmtP";
-            oShtTsks.Cells[1, 14] = "EstmtE";
-            oShtTsks.Cells[1, 15] = "Card ID";
-            oShtTsks.Cells[1, 16] = "Checklist ID";
-            oShtTsks.Cells[1, 17] = "Task ID";
-            oShtTsks.Cells[1, 18] = "Error Flag";
-            oShtTsks.Cells[1, 19] = "Error Desc";
-            oShtTsks.Cells[1, 20] = "CheckItem Name";
-            oShtTsks.Cells[1, 21] = "Card URL";
-            oShtTsks.Cells[1, 22] = "Card Last Activity";
-            oShtTsks.Cells[1, 23] = "Sort";
+            oShtTsks.Cells[1, 4] = "Priority";
+            oShtTsks.Cells[1, 5] = "Workphase Name";
+            oShtTsks.Cells[1, 6] = "Task Name";
+            oShtTsks.Cells[1, 7] = "Assigned";
+            oShtTsks.Cells[1, 8] = "Hrs Actl";
+            oShtTsks.Cells[1, 9] = "Hrs Rmnng";
+            oShtTsks.Cells[1, 10] = "Role";
+            oShtTsks.Cells[1, 11] = "Labels";
+            oShtTsks.Cells[1, 12] = "EstmtO";
+            oShtTsks.Cells[1, 13] = "EstmtL";
+            oShtTsks.Cells[1, 14] = "EstmtP";
+            oShtTsks.Cells[1, 15] = "EstmtE";
+            oShtTsks.Cells[1, 16] = "Card ID";
+            oShtTsks.Cells[1, 17] = "Checklist ID";
+            oShtTsks.Cells[1, 18] = "Task ID";
+            oShtTsks.Cells[1, 19] = "Error Flag";
+            oShtTsks.Cells[1, 20] = "Error Desc";
+            oShtTsks.Cells[1, 21] = "CheckItem Name";
+            oShtTsks.Cells[1, 22] = "Card URL";
+            oShtTsks.Cells[1, 23] = "Card Last Activity";
+            oShtTsks.Cells[1, 24] = "Sort";
 
             foreach (string BrdId in Brds)
             {
@@ -277,6 +281,22 @@ namespace MspUpdate
                             }
                         }
                     }
+
+                    // Get card priority
+                    CrdPrty = "unknown";
+                    if (Lbls.Contains("priority-high"))
+                    {
+                        CrdPrty = "high";
+                    }
+                    if (Lbls.Contains("priority-medium"))
+                    {
+                        CrdPrty = "medium";
+                    }
+                    if (Lbls.Contains("priority-low"))
+                    {
+                        CrdPrty = "low";
+                    }
+
 
                     // Trello Lists included and excluded
                     bool TrlloLstFnd = true;
@@ -776,7 +796,7 @@ namespace MspUpdate
                                     }
 
                                     // Add assignment row to data table
-                                    BrdAssgnmnts.Rows.Add(BrdNm, Lst, CrdNm, Lbls, WrkPhsNm, TskNm, Rl, Assgnd, HrsActl, HrsRmng, EstmtO, EstmtL, EstmtP, EstmtE, CrdId, ChckLstId, TskId, ErrrFnd, ErrrTxt, ChckItmNm, CrdUrl, CrdLstActvty);
+                                    BrdAssgnmnts.Rows.Add(BrdNm, Lst, CrdNm, CrdPrty, Lbls, WrkPhsNm, TskNm, Rl, Assgnd, HrsActl, HrsRmng, EstmtO, EstmtL, EstmtP, EstmtE, CrdId, ChckLstId, TskId, ErrrFnd, ErrrTxt, ChckItmNm, CrdUrl, CrdLstActvty);
                                 } // end if assignment found
                             }  // End foreach checklist item
                         } // End foreach checklist
@@ -794,7 +814,8 @@ namespace MspUpdate
                 oShtTsks.Cells[iRw1, 1] = TblRw.Field<string>("BrdNm");
                 oShtTsks.Cells[iRw1, 2] = TblRw.Field<string>("Lst");
                 oShtTsks.Cells[iRw1, 3] = TblRw.Field<string>("CrdNm");
-                oShtTsks.Cells[iRw1, 4] = TblRw.Field<string>("WrkPhsNm");
+                oShtTsks.Cells[iRw1, 4] = TblRw.Field<string>("CrdPrty");
+                oShtTsks.Cells[iRw1, 5] = TblRw.Field<string>("WrkPhsNm");
 
                 // Task name: remove double quotes, leading - and +, leading blanks
                 if (TblRw.Field<string>("TskNm").IndexOf("-") == 0 || TblRw.Field<string>("TskNm").IndexOf("+") == 0)   {
@@ -809,87 +830,87 @@ namespace MspUpdate
                     Str1 = Str1.Substring(1, Str1.Length - 1);
                 }
                 Str1 = Str1.Replace("\"", string.Empty);
-                oShtTsks.Cells[iRw1, 5] = Str1;
+                oShtTsks.Cells[iRw1, 6] = Str1;
 
-                oShtTsks.Cells[iRw1, 6] = TblRw.Field<string>("Assgnd");
-                oShtTsks.Cells[iRw1, 7] = TblRw.Field<float>("HrsActl");
-                oShtTsks.Cells[iRw1, 8] = TblRw.Field<float>("HrsRmnng");
-                oShtTsks.Cells[iRw1, 9] = TblRw.Field<string>("Rl");
-                oShtTsks.Cells[iRw1, 10] = TblRw.Field<string>("Lbls");
+                oShtTsks.Cells[iRw1, 7] = TblRw.Field<string>("Assgnd");
+                oShtTsks.Cells[iRw1, 8] = TblRw.Field<float>("HrsActl");
+                oShtTsks.Cells[iRw1, 9] = TblRw.Field<float>("HrsRmnng");
+                oShtTsks.Cells[iRw1, 10] = TblRw.Field<string>("Rl");
+                oShtTsks.Cells[iRw1, 11] = TblRw.Field<string>("Lbls");
 
                 if (TblRw.Field<float>("EstmtO") != -99f)
                 {
-                    oShtTsks.Cells[iRw1, 11] = TblRw.Field<float>("EstmtO");
-                }
-                else
-                {
-                    oShtTsks.Cells[iRw1, 11] = null;
-                }
-
-                if (TblRw.Field<float>("EstmtL") != -99f)
-                {
-                    oShtTsks.Cells[iRw1, 12] = TblRw.Field<float>("EstmtL");
+                    oShtTsks.Cells[iRw1, 12] = TblRw.Field<float>("EstmtO");
                 }
                 else
                 {
                     oShtTsks.Cells[iRw1, 12] = null;
                 }
 
-                if (TblRw.Field<float>("EstmtP") != -99f)
+                if (TblRw.Field<float>("EstmtL") != -99f)
                 {
-                    oShtTsks.Cells[iRw1, 13] = TblRw.Field<float>("EstmtP");
+                    oShtTsks.Cells[iRw1, 13] = TblRw.Field<float>("EstmtL");
                 }
                 else
                 {
                     oShtTsks.Cells[iRw1, 13] = null;
                 }
 
-                if (TblRw.Field<float>("EstmtE") != -99f)
+                if (TblRw.Field<float>("EstmtP") != -99f)
                 {
-                    oShtTsks.Cells[iRw1, 14] = TblRw.Field<float>("EstmtE");
+                    oShtTsks.Cells[iRw1, 14] = TblRw.Field<float>("EstmtP");
                 }
                 else
                 {
                     oShtTsks.Cells[iRw1, 14] = null;
                 }
 
-                oShtTsks.Cells[iRw1, 15] = TblRw.Field<string>("CrdId");
-                oShtTsks.Cells[iRw1, 16] = TblRw.Field<string>("ChckLstId");
-                oShtTsks.Cells[iRw1, 17] = TblRw.Field<string>("TskId");
-                oShtTsks.Cells[iRw1, 18] = TblRw.Field<bool>("ErrrFnd");
+                if (TblRw.Field<float>("EstmtE") != -99f)
+                {
+                    oShtTsks.Cells[iRw1, 15] = TblRw.Field<float>("EstmtE");
+                }
+                else
+                {
+                    oShtTsks.Cells[iRw1, 15] = null;
+                }
+
+                oShtTsks.Cells[iRw1, 16] = TblRw.Field<string>("CrdId");
+                oShtTsks.Cells[iRw1, 17] = TblRw.Field<string>("ChckLstId");
+                oShtTsks.Cells[iRw1, 18] = TblRw.Field<string>("TskId");
+                oShtTsks.Cells[iRw1, 19] = TblRw.Field<bool>("ErrrFnd");
 
                 if (TblRw.Field<string>("ErrrTxt") != "")
                 {
-                    oShtTsks.Cells[iRw1, 19] = TblRw.Field<string>("ErrrTxt");
+                    oShtTsks.Cells[iRw1, 20] = TblRw.Field<string>("ErrrTxt");
                     // Color row if error
                     oRng = (Excel.Range)oShtTsks.Range[oShtTsks.Cells[iRw1, 1], oShtTsks.Cells[iRw1, 15]];
                     oRng.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
                 }
                 else
                 {
-                    oShtTsks.Cells[iRw1, 19] = null;
+                    oShtTsks.Cells[iRw1, 20] = null;
                 }
 
                 // Checkitem name truncated to 100 chars due to MSP task name length limit
                 if (TblRw.Field<string>("ChckItmNm").Length <= 250) // was 100 3-17
                 {
-                    oShtTsks.Cells[iRw1, 20] = TblRw.Field<string>("ChckItmNm");
+                    oShtTsks.Cells[iRw1, 21] = TblRw.Field<string>("ChckItmNm");
 
                 }
                 else
                 {
-                    oShtTsks.Cells[iRw1, 20] = TblRw.Field<string>("ChckItmNm").Substring(0,250);  // was 100 3-17-2017
+                    oShtTsks.Cells[iRw1, 21] = TblRw.Field<string>("ChckItmNm").Substring(0,250);  // was 100 3-17-2017
                 }
 
                 // Card URL
-                oShtTsks.Cells[iRw1, 21] = TblRw.Field<string>("CrdUrl");
+                oShtTsks.Cells[iRw1, 22] = TblRw.Field<string>("CrdUrl");
 
                 // Card last activity
-                oShtTsks.Cells[iRw1, 22] = TblRw.Field<DateTime>("CrdLstActvty");
+                oShtTsks.Cells[iRw1, 23] = TblRw.Field<DateTime>("CrdLstActvty");
 
                 // Sort field.  Sort checklists in order
                 //Str1 = TblRw.Field<string>("WrkPhsNm")
-                oShtTsks.Cells[iRw1, 23] = TblRw.Field<string>("CrdNm") + "|" 
+                oShtTsks.Cells[iRw1, 24] = TblRw.Field<string>("CrdNm") + "|" 
                     + TblRw.Field<string>("WrkPhsNm")
                         .Replace("DEFINE", "1DEFINE")
                         .Replace("DESIGN", "2DESIGN")
@@ -918,7 +939,7 @@ namespace MspUpdate
             oLastAACell = oLastAACell.End[Excel.XlDirection.xlUp];
 
             // Move cursor to last col in last data row.  This is one corner of the range.
-            oLastAACell = (Excel.Range)oSheet.Cells[oLastAACell.Row, 23];
+            oLastAACell = (Excel.Range)oSheet.Cells[oLastAACell.Row, 24];
 
             //Get First Cell of Data (A2)
             oFirstACell = (Excel.Range)oSheet.Cells[2, 1];
@@ -928,7 +949,7 @@ namespace MspUpdate
             //oRng.Select();
 
             //Sort the range by the sort column
-            oRng.Sort(oRng.Columns[23, Type.Missing], Excel.XlSortOrder.xlAscending); 
+            oRng.Sort(oRng.Columns[24, Type.Missing], Excel.XlSortOrder.xlAscending); 
 
             // Save workbook
             oWB.Save();
