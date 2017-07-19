@@ -223,7 +223,7 @@ namespace MspUpdate
                         break;
 
                     case "BOOK TOOLS":
-                        Console.WriteLine("> Book Tools selected. Stand by...");
+                        Console.WriteLine("> Book Tools selected. Stand by....");
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
