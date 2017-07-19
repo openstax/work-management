@@ -215,7 +215,6 @@
     <None Include="UTS MSP Update.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Readme.txt" />
     <Content Include="UTS MSP Update Readme.txt" />
   </ItemGroup>
   <ItemGroup>
