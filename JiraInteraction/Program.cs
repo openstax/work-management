@@ -154,7 +154,7 @@ namespace MspUpdate
                     //Console.WriteLine(" TRELLO SYNC --------------------------");
                     //Console.WriteLine("");
                     Console.WriteLine("             [Tutor]: type Tutor");
-                    Console.WriteLine("          [Triple-C]: type Triple-C");
+                    Console.WriteLine("          [Book Tools]: type Book Tools");
                     Console.WriteLine("            [OS Web]: type OS Web");
                     Console.WriteLine("          [UTS Test]: type UTS Test");
                     //Console.WriteLine("               [1VT]: type TestPO");
@@ -222,8 +222,8 @@ namespace MspUpdate
                         loop = false;
                         break;
 
-                    case "TRIPLE-C":
-                        Console.WriteLine("> Triple-C selected. Stand by...");
+                    case "BOOK TOOLS":
+                        Console.WriteLine("> Book Tools selected. Stand by...");
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
