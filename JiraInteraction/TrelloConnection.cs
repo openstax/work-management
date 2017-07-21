@@ -161,7 +161,7 @@ namespace MspUpdate
             oXL.DisplayAlerts = true;
 
             // Worksheets
-            oShtExec = oWB.Worksheets[2];
+            oShtExec = oWB.Worksheets["Exec"];
             oShtExec.Cells[2, 2] = Prjct;
             oShtExec.Cells[3, 2] = CnfgFlPth;
 
@@ -910,7 +910,7 @@ namespace MspUpdate
 
                 // Sort field.  Sort checklists in order
                 //Str1 = TblRw.Field<string>("WrkPhsNm")
-                oShtTsks.Cells[iRw1, 24] = TblRw.Field<string>("CrdNm") + "|" 
+                oShtTsks.Cells[iRw1, 24] = TblRw.Field<string>("CrdId") + "|" 
                     + TblRw.Field<string>("WrkPhsNm")
                         .Replace("DEFINE", "1DEFINE")
                         .Replace("DESIGN", "2DESIGN")
