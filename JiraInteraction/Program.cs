@@ -301,10 +301,10 @@ namespace MspUpdate
             string ln;
             var Prms = new Dictionary<string, string>();
             string[] Tkns = new string[] { "" };
-            string Str1;
+            string Str1; 
 
             // Read config file
-            string UsrNm = Environment.UserName;
+            // string UsrNm = Environment.UserName;
             System.IO.StreamReader file = new System.IO.StreamReader(CnfgFlPth);
             while ((ln = file.ReadLine()) != null)
             {
