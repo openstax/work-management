@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-// test 2
-
-
 namespace MspUpdate
 {
     public class Configuration
@@ -151,16 +148,18 @@ namespace MspUpdate
                         break;
                 }
 
-                // File paths for debug
-                CnfgFlPth = Application.StartupPath;
-                XlsTmpltPth = Application.StartupPath;
+                // File paths
+                int Indx1 = Application.StartupPath.LastIndexOf("\\", 
+                    Application.StartupPath.Length, Application.StartupPath.Length, StringComparison.OrdinalIgnoreCase);
+                CnfgFlPth = Application.StartupPath.Substring(0, Indx1) + "\\UTS MSP Config.txt";
+                XlsTmpltPth = Application.StartupPath + "\\UTS MSP Update Template.xlsm";
                 if (DbgExec)
                 {
-                    CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\UTS\\UTS MSP Update\\UTS MSP Config.txt";
+                    CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\bin\\UTS MSP Config.txt";
                     XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
                 }
-                //CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy";
-                //XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy";
+                //CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy\\UTS MSP Config.txt";
+                //XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy\\UTS MSP Update Template.xlsm";
 
                 // Parms entered by user
                 if (UsrNmFnd)
@@ -287,7 +286,7 @@ namespace MspUpdate
 
             }
 
-            // Pause if console input
+            // Pause if console input 
             if (CnslInpt)
             {
                 Console.WriteLine("\r\nAll done...hit Enter to exit");

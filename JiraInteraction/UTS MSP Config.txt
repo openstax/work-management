@@ -1,0 +1,105 @@
+﻿Trello AppKey=703231aefbeb477f24ca6871addf1699
+Trello UserToken=908b5b92fc503cacde7d840d7ad424b2b57175ad2e27dfb254e681f32a73063e
+
+OS WEB:Boards=tTIzKN7Z;Drm8iCLR
+OS WEB:Trello Lists Included=
+OS WEB:Trello Lists Excluded=Released/Live;Project and Product
+OS WEB:Update MSP Actuals=FALSE
+OS WEB:Update MSP Projected=FALSE
+OS WEB:Update Date=today
+OS WEB:MSP Project Name=OS WEB
+OS WEB:Post All Checklist Items=FALSE
+OS WEB:Post Checkitem Name=FALSE
+OS WEB:Include Cards Changed After=1/1/1900
+OS WEB:Measure Labels=
+OS WEB:Projected Total Work Date Window Start - All Tasks=6/2/2017
+OS WEB:Projected Total Work Change Per Day - All Tasks=.5
+OS WEB:Projected Actual Work Date Window Start - All Tasks=6/2/2017
+OS WEB:Projected Actual Work Change Per Day - All Tasks=100
+OS WEB:Baseline Date Complete - All Tasks=7/20/2017
+OS WEB:Xls File Name=Trello Tasks OS Web.xlsm
+
+
+BOOK TOOLS:Boards=2F4NFEhP;jL1n7WEu;8DKh5iQR
+BOOK TOOLS:Trello Lists Included=
+BOOK TOOLS:Trello Lists Excluded=Old;Templates;Needs More Info;Change Request Inbox;Bug Inbox;Archive
+BOOK TOOLS:Trello Lists Open=Accepted;Define;Design;Decomp;Ready;Sprint Backlog 2017.07.28 Develop;Sprint Backlog 2017.07.14 Develop;Define/Design/Decomp;Doing;QA Test
+BOOK TOOLS:Update MSP Actuals=TRUE
+BOOK TOOLS:Update MSP Projected=FALSE
+BOOK TOOLS:Update Date=today
+BOOK TOOLS:MSP Project Name=Triple-C
+BOOK TOOLS:Post All Checklist Items=FALSE
+BOOK TOOLS:Post Checkitem Name=FALSE
+BOOK TOOLS:Include Cards Changed After=7/20/2017
+BOOK TOOLS:Measure Labels=assignable webview
+BOOK TOOLS:Projected Total Work Date Window Start - All Tasks=6/2/2017
+BOOK TOOLS:Projected Total Work Change Per Day - All Tasks=.5
+BOOK TOOLS:Projected Actual Work Date Window Start - All Tasks=6/2/2017
+BOOK TOOLS:Projected Actual Work Change Per Day - All Tasks=100
+BOOK TOOLS:Baseline Date Complete - All Tasks=7/20/2017
+BOOK TOOLS:Projected Total Work Date Window Start - assignable webview=6/2/2017
+BOOK TOOLS:Projected Total Work Change Per Day - assignable webview=7.3
+BOOK TOOLS:Projected Actual Work Date Window Start - assignable webview=6/2/2017
+BOOK TOOLS:Projected Actual Work Change Per Day - assignable webview=21.7
+BOOK TOOLS:Baseline Date Complete - assignable webview=7/14/2017
+BOOK TOOLS:Xls File Name=Trello Tasks Book Tools.xlsm
+
+TUTOR:Boards=DmQLxruq;EeM5lQlG
+TUTOR:Trello Lists Included=
+TUTOR:Trello Lists Excluded=BOARD PURPOSE;Bug/Change needs more info;1) CHANGE REQUEST BACKLOG (change INBOX);1) BUG BACKLOG (INBOX);3) REJECTED / BY DESIGN Communicate to requestor & archive;>>>>>>><<<<<<<;ARCHIVE of Rejects;ARCHIVE;Bug & Change INBOX
+TUTOR:Trello Lists Open=
+TUTOR:Update MSP Actuals=TRUE
+TUTOR:Update MSP Projected=FALSE
+TUTOR:Update Date=today
+TUTOR:MSP Project Name=Tutor
+TUTOR:Post All Checklist Items=FALSE
+TUTOR:Post Checkitem Name=FALSE
+TUTOR:Include Cards Changed After=7/20/2017
+TUTOR:Measure Labels=t3.ecommerce
+TUTOR:Projected Total Work Date Window Start - All Tasks=6/9/2017
+TUTOR:Projected Total Work Change Per Day - All Tasks=.5
+TUTOR:Projected Actual Work Date Window Start - All Tasks=6/9/2017
+TUTOR:Projected Actual Work Change Per Day - All Tasks=100
+TUTOR:Baseline Date Complete - All Tasks=7/20/2017
+TUTOR:Projected Total Work Date Window Start - t3.ecommerce=6/9/2017
+TUTOR:Projected Total Work Change Per Day - t3.ecommerce=5
+TUTOR:Projected Actual Work Date Window Start - t3.ecommerce=6/9/2017
+TUTOR:Projected Actual Work Change Per Day - t3.ecommerce=19
+TUTOR:Baseline Date Complete - t3.ecommerce=7/28/2017
+TUTOR:Xls File Name=Trello Tasks Tutor.xlsm
+
+UTS TEST:Boards=TuYGKqB6
+UTS TEST:Trello Lists Included=
+UTS TEST:Trello Lists Excluded=
+UTS TEST:Trello Lists Open=Sprint Backlog 6.18;Doing;QA Test;Test Count Open
+UTS TEST:Labels Included=
+UTS TEST:Update MSP Actuals=FALSE
+UTS TEST:Update MSP Projected=FALSE
+UTS TEST:Update Date=1/4/2018
+UTS TEST:MSP Project Name=UTS Test
+UTS TEST:Post All Checklist Items=FALSE
+UTS TEST:Post Checkitem Name=FALSE
+UTS TEST:Include Cards Changed After=1/1/1900
+UTS TEST:Measure Labels=2017 Jan - Mar;2017 Apr - Jun
+
+UTS TEST:Projected Total Work Date Window Start - All Tasks=1/2/2018
+UTS TEST:Projected Total Work Change Per Day - All Tasks=.5
+UTS TEST:Projected Actual Work Date Window Start - All Tasks=1/2/2018
+UTS TEST:Projected Actual Work Change Per Day - All Tasks=25
+UTS TEST:Baseline Date Complete - All Tasks=1/5/2018
+
+//UTS TEST:Projected Total Work Date Window Start - 2017 Jan - Mar=today-1
+UTS TEST:Projected Total Work Date Window Start - 2017 Jan - Mar=1/2/2018
+UTS TEST:Projected Total Work Change Per Day - 2017 Jan - Mar=1
+//UTS TEST:Projected Actual Work Date Window Start - 2017 Jan - Mar=today + 2
+UTS TEST:Projected Actual Work Date Window Start - 2017 Jan - Mar=1/2/2018
+UTS TEST:Projected Actual Work Change Per Day - 2017 Jan - Mar=15
+UTS TEST:Baseline Date Complete - 2017 Jan - Mar=1/5/2018
+
+UTS TEST:Projected Total Work Date Window Start - 2017 Apr - Jun=1/2/2018
+UTS TEST:Projected Total Work Change Per Day - 2017 Apr - Jun=2
+UTS TEST:Projected Actual Work Date Window Start - 2017 Apr - Jun=1/2/2018
+UTS TEST:Projected Actual Work Change Per Day - 2017 Apr - Jun=20
+UTS TEST:Baseline Date Complete - 2017 Apr - Jun=1/5/2018
+
+UTS TEST:Xls File Name=Trello Tasks UTS Test.xlsm
