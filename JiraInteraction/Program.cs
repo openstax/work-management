@@ -24,6 +24,7 @@ namespace MspUpdate
     }
     class Program
     {
+
         struct Result
         {
             public int add;
@@ -52,6 +53,14 @@ namespace MspUpdate
             public DateTime IncldCrdsChngdAftr;
             public string XlsFlNm;
         }
+
+        /*
+         * public void SetDebugExec()
+        {
+            DbgExec = true;
+        }
+        */
+
         static void Main(string[] args)
         {
             TrelloConnection trelloConnect = new TrelloConnection();
@@ -59,6 +68,7 @@ namespace MspUpdate
             var Cnfg = new Configuration();
             string CnfgFlPth = "";
             bool CnslInpt = true;
+            bool DbgExec = false;
             DateTime DtToUpdt = DateTime.Today;
             // string strDtToUpdt;
             DateTime IncldCrdsChngdAftr = new DateTime(1900, 1, 1);
@@ -81,6 +91,9 @@ namespace MspUpdate
             string XlsOutptDrctry = "";
             string XlsTmpltPth = "";
 
+            #if DEBUG
+                DbgExec = true;
+            #endif
 
             Console.Write("Start at " + DateTime.Now.ToString("hh:mm:ss") + "\r\n");
 
@@ -118,8 +131,8 @@ namespace MspUpdate
                 {
                     case "BruceP Rice":
                         UsrNmFnd = true;
-                        CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\UTS\\UTS MSP Update\\UTS MSP Config.txt";
-                        XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
+                        //CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\UTS\\UTS MSP Update\\UTS MSP Config.txt";
+                        //XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
                         XlsOutptDrctry = "c:\\temp\\";
                         MspExe = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINPROJ.EXE";
                         break;
@@ -136,6 +149,17 @@ namespace MspUpdate
                         Console.WriteLine("Username not found");
                         break;
                 }
+
+                // File paths for debug
+                CnfgFlPth = Application.StartupPath;
+                XlsTmpltPth = Application.StartupPath;
+                if (DbgExec)
+                {
+                    CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\UTS\\UTS MSP Update\\UTS MSP Config.txt";
+                    XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
+                }
+                //CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy";
+                //XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy";
 
                 // Parms entered by user
                 if (UsrNmFnd)
@@ -280,6 +304,7 @@ namespace MspUpdate
             string Str1;
 
             // Read config file
+            string UsrNm = Environment.UserName;
             System.IO.StreamReader file = new System.IO.StreamReader(CnfgFlPth);
             while ((ln = file.ReadLine()) != null)
             {
