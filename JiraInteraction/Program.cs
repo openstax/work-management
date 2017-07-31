@@ -13,12 +13,14 @@ namespace MspUpdate
         public bool UpdtMspActls;
         public bool UpdtMspPrjctd;
         public DateTime UpdtDt;
+        public string MspExe;
         public string MspPrjctNm;
         public bool PstAllChckLstItms;
         public DateTime IncldCrdsChngdAftr;
         public string TrlloAppKy;
         public string TrlloUsrTkn;
         public string XlsFlNm;
+        public string XlsOutptDrctry;
     }
     class Program
     {
@@ -119,35 +121,10 @@ namespace MspUpdate
                 MsrLblsStr = args[10];
             }
 
-            // MessageBox.Show("Entering Main: UpdtMsp=" + Convert.ToString(UpdtMsp) + " PstAllChckLstItms=" + Convert.ToString(PstAllChckLstItms) + " PstChckItmNm=" + Convert.ToString(PstChckItmNm));
+            //MessageBox.Show("Entering Main: UpdtMsp=" + Convert.ToString(UpdtMsp) + " PstAllChckLstItms=" + Convert.ToString(PstAllChckLstItms) + " PstChckItmNm=" + Convert.ToString(PstChckItmNm));
 
             if (CnslInpt)
             {
-                // Parms set by username
-                string aEnvNm = Environment.UserName;
-                switch (Environment.UserName)
-                {
-                    case "BruceP Rice":
-                        UsrNmFnd = true;
-                        //CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\UTS\\UTS MSP Update\\UTS MSP Config.txt";
-                        //XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
-                        XlsOutptDrctry = "c:\\temp\\";
-                        MspExe = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINPROJ.EXE";
-                        break;
-
-                    //case "Norm":
-                    //    UsrNmFnd = true;
-                    //    XlsTmpltPth = "C:\\Users\\norm\\Source\\Workspaces\\Mayor\\ToolsAutomation\\JiraInteraction\\JiraInteraction\\UTS MSP Update Template.xlsm";
-                    //    XlsOutptDrctry = "c:\\temp\\";
-                    //    MspExe = "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINPROJ.EXE";
-                    //    break;
-
-                    default:
-                        UsrNmFnd = false;
-                        Console.WriteLine("Username not found");
-                        break;
-                }
-
                 // File paths
                 int Indx1 = Application.StartupPath.LastIndexOf("\\", 
                     Application.StartupPath.Length, Application.StartupPath.Length, StringComparison.OrdinalIgnoreCase);
@@ -158,61 +135,27 @@ namespace MspUpdate
                     CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\bin\\UTS MSP Config.txt";
                     XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\JiraInteraction\\UTS MSP Update Template.xlsm";
                 }
-                //CnfgFlPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy\\UTS MSP Config.txt";
-                //XlsTmpltPth = "C:\\Users\\Bruce Pike Rice\\Documents\\Bin\\MSP Update\\Deploy\\UTS MSP Update Template.xlsm";
 
                 // Parms entered by user
-                if (UsrNmFnd)
-                {
-                    Console.WriteLine("MSP Update"); Console.WriteLine("");
-                    Console.WriteLine("Select Project:"); Console.WriteLine("");
-                    //Console.WriteLine("");
-                    //Console.WriteLine(" PIVOTAL SYNC --------------------------");
-                    //Console.WriteLine("");
-                    //Console.WriteLine(" [1 Version of Truth]: type 1VT");
-                    //Console.WriteLine("          [All TUTOR]: type All TUTOR");
-                    //Console.WriteLine("           [v2 TUTOR]: type V2 TUTOR");
-                    //Console.WriteLine("   [count in past 24]: type 24");
-                    //Console.WriteLine("   [count 2 days ago]: type dayb4y");
-                    //Console.WriteLine("");
-                    //Console.WriteLine(" TRELLO SYNC --------------------------");
-                    //Console.WriteLine("");
-                    Console.WriteLine("             [Tutor]: type Tutor");
-                    Console.WriteLine("          [Book Tools]: type Book Tools");
-                    Console.WriteLine("            [OS Web]: type OS Web");
-                    Console.WriteLine("          [UTS Test]: type UTS Test");
-                    //Console.WriteLine("               [1VT]: type TestPO");
-                    //Console.WriteLine("      [Norm's Retun]: type NR");
-
-                    //Console.WriteLine("");
-                    //Console.WriteLine(" Release Card Data --------------------------");
-                    //Console.WriteLine("");
-                    //Console.WriteLine("               [RC]: type ReleaseWeb");
-                    //Console.WriteLine("");
-
-                    //Console.WriteLine(" CSV SYNC -----------------------------");
-                    //Console.WriteLine("");
-                    //Console.WriteLine("");
-                    //Console.WriteLine("");
-                    //Console.WriteLine(" Project Update --------------------------");
-                    //Console.WriteLine("");
-                    //Console.WriteLine("               [Project update by MSP client]: type Client");
-                    Console.WriteLine("");
-                    Console.WriteLine("To quit, type EXIT"); Console.WriteLine("");
-                    Console.WriteLine("...........................................................");
-
-                }
+                Console.WriteLine("MSP Update"); Console.WriteLine("");
+                Console.WriteLine("Select Project:"); Console.WriteLine("");
+                Console.WriteLine("             [Tutor]: type Tutor");
+                Console.WriteLine("          [Book Tools]: type Book Tools");
+                Console.WriteLine("            [OS Web]: type OS Web");
+                Console.WriteLine("          [UTS Test]: type UTS Test");
+                Console.WriteLine("");
+                Console.WriteLine("To quit, type EXIT"); Console.WriteLine("");
+                Console.WriteLine("...........................................................");
 
             }
             bool loop = true;
-            while (loop && UsrNmFnd)
+            while (loop)
             {
                 if (CnslInpt)
                 {
                     loop = true;
                     reply = Console.ReadLine(); Console.WriteLine("");
                     Prjct = reply.ToUpper();
-
                 }
 
                 loop = false;
@@ -320,6 +263,8 @@ namespace MspUpdate
             //Get parms
             Cnfg.TrlloAppKy = Prms["Trello AppKey"];
             Cnfg.TrlloUsrTkn = Prms["Trello UserToken"];
+            Cnfg.MspExe = Prms["MS Project Exe"];
+            Cnfg.XlsOutptDrctry = Prms["Xls Output Directory"];
 
             Cnfg.MspPrjctNm = Prms[Prjct + ":MSP Project Name"];
 
