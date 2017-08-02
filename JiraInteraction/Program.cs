@@ -11,6 +11,7 @@ namespace MspUpdate
         public List<string> TrlloLstsIncldd = new List<string>();
         public List<string> TrlloLstsExcldd = new List<string>();
         public bool UpdtMspActls;
+        public bool UpdtMspMsrs;
         public bool UpdtMspPrjctd;
         public DateTime UpdtDt;
         public string MspExe;
@@ -303,6 +304,9 @@ namespace MspUpdate
 
             Str1 = Prms[Prjct + ":Update MSP Actuals"];
             Cnfg.UpdtMspActls = Convert.ToBoolean(Str1);
+
+            Str1 = Prms[Prjct + ":Update MSP Measures"];
+            Cnfg.UpdtMspMsrs = Convert.ToBoolean(Str1);
 
             Str1 = Prms[Prjct + ":Update MSP Projected"];
             Cnfg.UpdtMspPrjctd = Convert.ToBoolean(Str1);
