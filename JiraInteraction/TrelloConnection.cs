@@ -112,6 +112,7 @@ namespace MspUpdate
             string TskNm = "";
             string Txt1;
             bool UpdtMspActls;
+            bool UpdtMspMsrs;
             bool UpdtMspPrjctd;
 
             BrdAssgnmnts.Columns.Add("BrdNm", typeof(string));
@@ -141,6 +142,7 @@ namespace MspUpdate
             //Parms
             Brds = Cnfg.Brds;
             UpdtMspActls = Cnfg.UpdtMspActls;
+            UpdtMspMsrs = Cnfg.UpdtMspMsrs;
             UpdtMspPrjctd = Cnfg.UpdtMspPrjctd;
             PstAllChckLstItms = Cnfg.PstAllChckLstItms;
             IncldCrdsChngdAftr = Cnfg.IncldCrdsChngdAftr;
@@ -960,7 +962,7 @@ namespace MspUpdate
             // Update Project Online
             // DateTime DtUpdt = new DateTime(2017, 1, 3);
             // string PrjctMsp = "BruceP Test 2";
-            if (UpdtMspActls || UpdtMspPrjctd)
+            if (UpdtMspActls || UpdtMspPrjctd || UpdtMspMsrs)
             {
                 oXL.Run("Update_Project_Online", MspExe);
             }
