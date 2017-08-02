@@ -31,7 +31,6 @@ namespace MspUpdate
             string XlsTmpltPth,
             string XlsFlPth,
             string CnfgFlPth,
-            string MspExe,
             Configuration Cnfg
         )
         {
@@ -84,6 +83,7 @@ namespace MspUpdate
             string Lbls;
             //string LblsCrd;
             string Lst;
+            string MspExe;
             float Nmbr1;
             Excel.Range oRng;
             //Excel.Range oRngStrt;
@@ -141,6 +141,7 @@ namespace MspUpdate
 
             //Parms
             Brds = Cnfg.Brds;
+            MspExe = Cnfg.MspExe;
             UpdtMspActls = Cnfg.UpdtMspActls;
             UpdtMspMsrs = Cnfg.UpdtMspMsrs;
             UpdtMspPrjctd = Cnfg.UpdtMspPrjctd;
