@@ -172,7 +172,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, MspExe, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
 
                         loop = false;
                         break;
@@ -185,7 +185,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, MspExe, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
 
                         loop = false;
                         break;
@@ -198,7 +198,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, MspExe, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
 
                         loop = false;
                         break;
@@ -211,7 +211,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, MspExe, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
 
                         loop = false;
                         break;
