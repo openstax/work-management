@@ -264,7 +264,7 @@ namespace MspUpdate
 
             //Get parms
             Str1 = Prms[Prjct + ":Debug"];
-            Cnfg.DbgUsr = Convert.ToBoolean(Str1);
+            //Cnfg.DbgUsr = Convert.ToBoolean(Str1);
 
             Cnfg.TrlloAppKy = Prms["Trello AppKey"];
             Cnfg.TrlloUsrTkn = Prms["Trello UserToken"];

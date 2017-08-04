@@ -156,9 +156,20 @@ namespace MspUpdate
             TrlloLstsIncldd = Cnfg.TrlloLstsIncldd;
             TrlloLstsExcldd = Cnfg.TrlloLstsExcldd;
 
+
+
             //Start Excel and get Application object.
             oXL = new Microsoft.Office.Interop.Excel.Application();
-            oXL.Visible = true;
+            //oXL.Visible = true;
+
+            try
+            {
+                oXL.Visible = true;
+            }
+            catch(Exception Excptn)
+            {
+                Console.Write("\r\nError making xls visible: " + Excptn);
+            }
 
             if (Cnfg.DbgUsr) {
                 Console.Write("\r\nAfter Excel started");
