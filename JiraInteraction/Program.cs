@@ -7,6 +7,7 @@ namespace MspUpdate
 {
     public class Configuration
     {
+        public bool DbgUsr;
         public List<string> Brds = new List<string>();
         public List<string> TrlloLstsIncldd = new List<string>();
         public List<string> TrlloLstsExcldd = new List<string>();
@@ -262,11 +263,13 @@ namespace MspUpdate
             file.Close();
 
             //Get parms
+            Str1 = Prms[Prjct + ":Debug"];
+            Cnfg.DbgUsr = Convert.ToBoolean(Str1);
+
             Cnfg.TrlloAppKy = Prms["Trello AppKey"];
             Cnfg.TrlloUsrTkn = Prms["Trello UserToken"];
             Cnfg.MspExe = Prms["MS Project Exe"];
             Cnfg.XlsOutptDrctry = Prms["Xls Output Directory"];
-
             Cnfg.MspPrjctNm = Prms[Prjct + ":MSP Project Name"];
 
             Lst.Clear();

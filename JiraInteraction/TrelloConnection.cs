@@ -34,7 +34,9 @@ namespace MspUpdate
             Configuration Cnfg
         )
         {
-            //MessageBox.Show("Entering CTEReadBoard: UpdtMsp=" + Convert.ToString(UpdtMsp) + " PstAllChckLstItms=" + Convert.ToString(PstAllChckLstItms) + " PstChckItmNm=" + Convert.ToString(PstChckItmNm));
+            if (Cnfg.DbgUsr) {
+                Console.Write("\r\nEntering CTEReadBoard");
+            }
 
             var serializer = new ManateeSerializer();
             TrelloConfiguration.Serializer = serializer;
@@ -54,6 +56,10 @@ namespace MspUpdate
 
             // Microsoft.Office.Interop.Excel.Range oRng;
             object misvalue = System.Reflection.Missing.Value;
+
+            if (Cnfg.DbgUsr) {
+                Console.Write("\r\nAfter worksheets defined");
+            }
 
             // Variables
             string Assgnd = "";
@@ -154,6 +160,10 @@ namespace MspUpdate
             oXL = new Microsoft.Office.Interop.Excel.Application();
             oXL.Visible = true;
 
+            if (Cnfg.DbgUsr) {
+                Console.Write("\r\nAfter Excel started");
+            }
+
             // Open the template xls and save under new name.
             oWB = (Microsoft.Office.Interop.Excel._Workbook) oXL.Workbooks.Open(XlsTmpltPth);
             oXL.UserControl = false;
@@ -162,6 +172,10 @@ namespace MspUpdate
                 false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             oXL.DisplayAlerts = true;
+
+            if (Cnfg.DbgUsr) {
+                Console.Write("\r\nAfter xls saved");
+            }
 
             // Worksheets
             oShtExec = oWB.Worksheets["Exec"];
