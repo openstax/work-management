@@ -86,6 +86,7 @@ namespace MspUpdate
             string[] StrArry;
             string MsrLblsStr = "";
             string[] Tkns = new string[] { "" };
+            string TmStrt;
             List<string> TrlloLstsIncldd = new List<string>(); // Trllo lists included
             bool UpdtMsp = true;
             bool UsrNmFnd = false;
@@ -97,7 +98,8 @@ namespace MspUpdate
                 DbgExec = true;
             #endif
 
-            Console.Write("Start at " + DateTime.Now.ToString("hh:mm:ss") + "\r\n");
+            TmStrt = DateTime.Now.ToString("hh:mm:ss");
+            Console.Write("Start at " + TmStrt + "\r\n");
 
             // Get args.  THIS IS BROKEN.
             if (args.Length != 0)
@@ -173,7 +175,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
 
                         loop = false;
                         break;
@@ -186,7 +188,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
 
                         loop = false;
                         break;
@@ -199,7 +201,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
 
                         loop = false;
                         break;
@@ -212,7 +214,7 @@ namespace MspUpdate
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
 
                         loop = false;
                         break;
