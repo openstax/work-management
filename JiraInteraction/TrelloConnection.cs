@@ -31,7 +31,8 @@ namespace MspUpdate
             string XlsTmpltPth,
             string XlsFlPth,
             string CnfgFlPth,
-            Configuration Cnfg
+            Configuration Cnfg,
+            String TmStrt
         )
         {
             if (Cnfg.DbgUsr) {
@@ -110,6 +111,7 @@ namespace MspUpdate
             string[] Tkns1 = new string[] { "" };
             string[] Tkns2 = new string[] { "" };
             string[] Tkns3 = new string[] { "" };
+            string Tm;
             //string TrllNm = ""; // Trello username
             List<string> TrlloLstsIncldd = new List<string>();
             List<string> TrlloLstsExcldd = new List<string>();
@@ -192,6 +194,7 @@ namespace MspUpdate
             oShtExec = oWB.Worksheets["Exec"];
             oShtExec.Cells[2, 2] = Prjct;
             oShtExec.Cells[3, 2] = CnfgFlPth;
+            oShtExec.Cells[4, 2] = TmStrt;
 
             oShtErrr = oWB.Worksheets.Add(oWB.Worksheets[1]);
             oShtErrr.Name = "Errors";
@@ -558,6 +561,8 @@ namespace MspUpdate
                                                 Str1 = StrHrs.Replace(" ", "").Replace("....", "");
 
                                                 // Split to get hrs numbers
+                                                // For HrsActl ? = 0
+                                                // For HrsRmng ? = 5.5h
                                                 Tkns2 = Regex.Split(Str1, ",");
                                                 if (Tkns2.Length == 2)
                                                 {
@@ -568,7 +573,14 @@ namespace MspUpdate
                                                     }
                                                     else
                                                     {
-                                                        ErrrAr = true;
+                                                        if (Tkns2[0] == "?" || Tkns2[0] == "??")
+                                                        {
+                                                            HrsActl = 0f;
+                                                        }
+                                                        else
+                                                        {
+                                                            ErrrAr = true;
+                                                        }
                                                     }
 
                                                     if (float.TryParse(Tkns2[1], out Nmbr1))
@@ -979,11 +991,16 @@ namespace MspUpdate
             //Sort the range by the sort column
             oRng.Sort(oRng.Columns[24, Type.Missing], Excel.XlSortOrder.xlAscending); 
 
+            // 
+
             // Save workbook
             oWB.Save();
 
-            // Write datetime to console
-            Console.Write("\r\nTrello scan done; starting MSP update at " + DateTime.Now.ToString("hh:mm:ss"));
+            // Write time Trello scan done
+            Tm = DateTime.Now.ToString("hh:mm:ss");
+            Console.Write("\r\nTrello scan done; starting MSP update at " + Tm);
+            oShtExec.Cells[5, 2] = Tm;
+
 
             // Update Project Online
             // DateTime DtUpdt = new DateTime(2017, 1, 3);
@@ -993,8 +1010,10 @@ namespace MspUpdate
                 oXL.Run("Update_Project_Online", MspExe);
             }
 
-            // Write datetime to console
-            Console.Write("\r\nMSP update completed at " + DateTime.Now.ToString("hh:mm:ss"));
+            // Write time completed
+            Tm = DateTime.Now.ToString("hh:mm:ss");
+            Console.Write("\r\nMSP update completed at " + Tm);
+            oShtExec.Cells[9, 2] = Tm;
 
             // Close xls
             //oXL.Visible = false;
