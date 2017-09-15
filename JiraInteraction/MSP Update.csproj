@@ -215,6 +215,8 @@
     <None Include="UTS MSP Update.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Deploy.py" />
+    <Content Include="Run.py" />
     <Content Include="UTS MSP Update Readme.txt" />
   </ItemGroup>
   <ItemGroup>
