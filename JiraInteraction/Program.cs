@@ -143,10 +143,10 @@ namespace MspUpdate
                 // Parms entered by user
                 Console.WriteLine("MSP Update"); Console.WriteLine("");
                 Console.WriteLine("Select Project:"); Console.WriteLine("");
-                Console.WriteLine("             [Tutor]: type Tutor");
-                Console.WriteLine("          [Book Tools]: type Book Tools");
-                Console.WriteLine("            [OS Web]: type OS Web");
-                Console.WriteLine("          [UTS Test]: type UTS Test");
+                Console.WriteLine("                [Tutor]: type Tutor");
+                Console.WriteLine("           [Book Tools]: type Book Tools");
+                Console.WriteLine("[Business Intelligence]: type BIT");
+                Console.WriteLine("             [UTS Test]: type UTS Test");
                 Console.WriteLine("");
                 Console.WriteLine("To quit, type EXIT"); Console.WriteLine("");
                 Console.WriteLine("...........................................................");
@@ -206,8 +206,8 @@ namespace MspUpdate
                         loop = false;
                         break;
 
-                    case "OS WEB":
-                        Console.WriteLine("> OS Web selected. Stand by...");
+                    case "BIT":
+                        Console.WriteLine("> BIT selected. Stand by...");
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
