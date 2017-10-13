@@ -216,7 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Deploy.py" />
-    <None Include="OpenStax Development Metrics.md" />
     <Content Include="Run.py" />
     <Content Include="UTS MSP Update Readme.txt" />
   </ItemGroup>
