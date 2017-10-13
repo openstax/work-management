@@ -35,7 +35,8 @@ namespace MspUpdate
             String TmStrt
         )
         {
-            if (Cnfg.DbgUsr) {
+            if (Cnfg.DbgUsr)
+            {
                 Console.Write("\r\nEntering CTEReadBoard");
             }
 
@@ -59,7 +60,8 @@ namespace MspUpdate
             // Microsoft.Office.Interop.Excel.Range oRng;
             object misvalue = System.Reflection.Missing.Value;
 
-            if (Cnfg.DbgUsr) {
+            if (Cnfg.DbgUsr)
+            {
                 Console.Write("\r\nAfter worksheets defined");
             }
 
@@ -170,17 +172,18 @@ namespace MspUpdate
             {
                 oXL.Visible = true;
             }
-            catch(Exception Excptn)
+            catch (Exception Excptn)
             {
                 Console.Write("\r\nError making xls visible: " + Excptn);
             }
 
-            if (Cnfg.DbgUsr) {
+            if (Cnfg.DbgUsr)
+            {
                 Console.Write("\r\nAfter Excel started");
             }
 
             // Open the template xls and save under new name.
-            oWB = (Microsoft.Office.Interop.Excel._Workbook) oXL.Workbooks.Open(XlsTmpltPth);
+            oWB = (Microsoft.Office.Interop.Excel._Workbook)oXL.Workbooks.Open(XlsTmpltPth);
             oXL.UserControl = false;
             oXL.DisplayAlerts = false;
             oWB.SaveAs(XlsFlPth, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled, Type.Missing, Type.Missing,
@@ -188,7 +191,8 @@ namespace MspUpdate
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             oXL.DisplayAlerts = true;
 
-            if (Cnfg.DbgUsr) {
+            if (Cnfg.DbgUsr)
+            {
                 Console.Write("\r\nAfter xls saved");
             }
 
@@ -303,7 +307,14 @@ namespace MspUpdate
                 var board = new Board(BrdId);
 
                 // Board data elements
-                BrdNm = board.Name;
+                try
+                {
+                    BrdNm = board.Name;
+                }
+                catch (Manatee.Trello.Exceptions.TrelloInteractionException xcptn)
+                {
+                    Console.WriteLine("Error: '{0}'", xcptn.Message);
+                }
 
 
                 // Debug: Cards to be read for debug
@@ -434,7 +445,7 @@ namespace MspUpdate
                                 ChckItmNm = ChckItmNm.Replace("...", " --- ");
 
                                 // Remove extra spaces from checklist item
-                                while(ChckItmNm.LastIndexOf("  ") != -1)
+                                while (ChckItmNm.LastIndexOf("  ") != -1)
                                 {
                                     ChckItmNm = ChckItmNm.Replace("  ", " ");
                                 }
@@ -450,8 +461,8 @@ namespace MspUpdate
                                 }
                                 else
                                 {
-                                   // Checklist items containing "ar:" are tasks
-                                   foreach (string Tkn in Tkns)
+                                    // Checklist items containing "ar:" are tasks
+                                    foreach (string Tkn in Tkns)
                                     {
                                         if (Tkn.Contains("ar:"))
                                         {
@@ -575,7 +586,7 @@ namespace MspUpdate
                                                                 StrHrs = Tkns[iTkn];
                                                             }
                                                         }
-                                                    } while (StrHrs == "" && iTkn < Tkns.Length);
+                                                    } while (StrHrs == "" && iTkn < Tkns.Length) ;
                                                 }
                                             }
 
@@ -884,7 +895,8 @@ namespace MspUpdate
                 oShtTsks.Cells[iRw1, 5] = TblRw.Field<string>("WrkPhsNm");
 
                 // Task name: remove double quotes, leading - and +, leading blanks
-                if (TblRw.Field<string>("TskNm").IndexOf("-") == 0 || TblRw.Field<string>("TskNm").IndexOf("+") == 0)   {
+                if (TblRw.Field<string>("TskNm").IndexOf("-") == 0 || TblRw.Field<string>("TskNm").IndexOf("+") == 0)
+                {
                     Str1 = TblRw.Field<string>("TskNm").Substring(1, TblRw.Field<string>("TskNm").Length - 1);
                 }
                 else
@@ -965,7 +977,7 @@ namespace MspUpdate
                 }
                 else
                 {
-                    oShtTsks.Cells[iRw1, 21] = TblRw.Field<string>("ChckItmNm").Substring(0,250);  // was 100 3-17-2017
+                    oShtTsks.Cells[iRw1, 21] = TblRw.Field<string>("ChckItmNm").Substring(0, 250);  // was 100 3-17-2017
                 }
 
                 // Card URL
@@ -976,13 +988,13 @@ namespace MspUpdate
 
                 // Sort field.  Sort checklists in order
                 //Str1 = TblRw.Field<string>("WrkPhsNm")
-                oShtTsks.Cells[iRw1, 24] = TblRw.Field<string>("CrdId") + "|" 
+                oShtTsks.Cells[iRw1, 24] = TblRw.Field<string>("CrdId") + "|"
                     + TblRw.Field<string>("WrkPhsNm")
                         .Replace("DEFINE", "1DEFINE")
                         .Replace("DESIGN", "2DESIGN")
                         .Replace("DECOMPOSE", "3DECOMPOSE")
                         .Replace("DEVELOP", "4DEVELOP")
-                        .Replace("CODE", "4CODE") 
+                        .Replace("CODE", "4CODE")
                         .Replace("TEST", "5TEST")
                         .Replace("DOCUMENT", "6DOCUMENT")
                     + "|" + TblRw.Field<string>("TskNm") + "|" + TblRw.Field<string>("Assgnd");
