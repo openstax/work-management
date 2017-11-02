@@ -1,2 +1,3 @@
 # Work Management
-[OpenStax Development Metrics](https://github.com/openstax/work-management-reports/blob/master/OpenStax%20Development%20Metrics.md)
+## Metric Dashboard
+[OpenStax Development Metrics](https://openstax.github.io/work-management-reports/openstax_development_metrics)
