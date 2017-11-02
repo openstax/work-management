@@ -146,6 +146,7 @@ namespace MspUpdate
                 Console.WriteLine("                [Tutor]: type Tutor");
                 Console.WriteLine("           [Book Tools]: type Book Tools");
                 Console.WriteLine("[Business Intelligence]: type BIT");
+                Console.WriteLine("             [Research]: type Research");
                 Console.WriteLine("             [UTS Test]: type UTS Test");
                 Console.WriteLine("");
                 Console.WriteLine("To quit, type EXIT"); Console.WriteLine("");
@@ -206,6 +207,23 @@ namespace MspUpdate
                         loop = false;
                         break;
 
+                    case "RESEARCH":
+                        Console.WriteLine("> Research selected. Stand by...");
+
+                        // Get configuration
+                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
+                        XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+
+                        Console.WriteLine("Update MSP Actuals = " + Cnfg.UpdtMspActls);
+                        Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
+                        Console.WriteLine("Update MSP Measures = " + Cnfg.UpdtMspMsrs);
+
+                        // Read boards
+                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+
+                        loop = false;
+                        break;
+
                     case "BIT":
                         Console.WriteLine("> BIT selected. Stand by...");
 
@@ -218,7 +236,6 @@ namespace MspUpdate
 
                         loop = false;
                         break;
-
                     case "EXIT":
                         Console.WriteLine("Exiting. Stand by...(hit return)");
                         loop = false;
