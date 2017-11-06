@@ -214,10 +214,6 @@ namespace MspUpdate
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
                         XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
-                        Console.WriteLine("Update MSP Actuals = " + Cnfg.UpdtMspActls);
-                        Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
-                        Console.WriteLine("Update MSP Measures = " + Cnfg.UpdtMspMsrs);
-
                         // Read boards
                         trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
 
@@ -340,6 +336,10 @@ namespace MspUpdate
             Cnfg.IncldCrdsChngdAftr = Convert.ToDateTime(Str1);
 
             Cnfg.XlsFlNm = Prms[Prjct + ":Xls File Name"];
+
+            Console.WriteLine("Update MSP Actuals = " + Cnfg.UpdtMspActls);
+            Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
+            Console.WriteLine("Update MSP Measures = " + Cnfg.UpdtMspMsrs);
 
             return Cnfg;
         }
