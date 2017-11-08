@@ -52,9 +52,9 @@ namespace MspUpdate
             Microsoft.Office.Interop.Excel._Workbook oWB;
             Microsoft.Office.Interop.Excel._Worksheet oSheet;
             Microsoft.Office.Interop.Excel._Worksheet oShtAllCrds;
-            Microsoft.Office.Interop.Excel._Worksheet oShtErrr;
+            Microsoft.Office.Interop.Excel._Worksheet oShtTrlloScnErrr;
             Microsoft.Office.Interop.Excel._Worksheet oShtExec;
-            Microsoft.Office.Interop.Excel._Worksheet oShtFvSprnt;
+            Microsoft.Office.Interop.Excel._Worksheet oShtExprt10K;
             Microsoft.Office.Interop.Excel._Worksheet oShtTsks;
 
             // Microsoft.Office.Interop.Excel.Range oRng;
@@ -202,41 +202,39 @@ namespace MspUpdate
             oShtExec.Cells[3, 2] = CnfgFlPth;
             oShtExec.Cells[4, 2] = TmStrt;
 
-            oShtFvSprnt = oWB.Worksheets["Five-Sprint Export"];
-            oShtFvSprnt.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
-            oShtFvSprnt.Columns[1].ColumnWidth = 20;
-            oShtFvSprnt.Columns[2].ColumnWidth = 10;
-            oShtFvSprnt.Columns[3].ColumnWidth = 20;
-            oShtFvSprnt.Columns[4].ColumnWidth = 15;
-            oShtFvSprnt.Columns[5].ColumnWidth = 5;
-            oShtFvSprnt.Columns[6].ColumnWidth = 4;
-            oShtFvSprnt.Columns[7].ColumnWidth = 5;
-            oShtFvSprnt.Columns[8].ColumnWidth = 6;
-            oShtFvSprnt.Columns[9].ColumnWidth = 16;
-            oShtFvSprnt.Columns[10].ColumnWidth = 10;
-            oShtFvSprnt.Cells[1, 1] = "Card Name";
-            oShtFvSprnt.Cells[1, 2] = "Workphase Name";
-            oShtFvSprnt.Cells[1, 3] = "Task Name";
-            oShtFvSprnt.Cells[1, 4] = "Assigned";
-            oShtFvSprnt.Cells[1, 5] = "Hrs Actl";
-            oShtFvSprnt.Cells[1, 6] = "Hrs Rmnng";
-            oShtFvSprnt.Cells[1, 7] = "Labels";
-            oShtFvSprnt.Cells[1, 8] = "Error Flag";
-            oShtFvSprnt.Cells[1, 9] = "Error Desc";
-            oShtFvSprnt.Cells[1, 10] = "Card URL";
+            oShtExprt10K = oWB.Worksheets["Export 10K"];
+            oShtExprt10K.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
+            oShtExprt10K.Columns[1].ColumnWidth = 20;
+            oShtExprt10K.Columns[2].ColumnWidth = 10;
+            oShtExprt10K.Columns[3].ColumnWidth = 20;
+            oShtExprt10K.Columns[4].ColumnWidth = 15;
+            oShtExprt10K.Columns[5].ColumnWidth = 5;
+            oShtExprt10K.Columns[6].ColumnWidth = 4;
+            oShtExprt10K.Columns[7].ColumnWidth = 5;
+            oShtExprt10K.Columns[8].ColumnWidth = 6;
+            oShtExprt10K.Columns[9].ColumnWidth = 16;
+            oShtExprt10K.Columns[10].ColumnWidth = 10;
+            oShtExprt10K.Cells[1, 1] = "Card Name";
+            oShtExprt10K.Cells[1, 2] = "Workphase Name";
+            oShtExprt10K.Cells[1, 3] = "Task Name";
+            oShtExprt10K.Cells[1, 4] = "Assigned";
+            oShtExprt10K.Cells[1, 5] = "Hrs Actl";
+            oShtExprt10K.Cells[1, 6] = "Hrs Rmnng";
+            oShtExprt10K.Cells[1, 7] = "Labels";
+            oShtExprt10K.Cells[1, 8] = "Error Flag";
+            oShtExprt10K.Cells[1, 9] = "Error Desc";
+            oShtExprt10K.Cells[1, 10] = "Card URL";
 
-            oShtErrr = oWB.Worksheets.Add(oWB.Worksheets[1]);
-            oShtErrr.Name = "Errors";
-            oShtErrr.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
-            oShtErrr.Columns[1].ColumnWidth = 20;
-            oShtErrr.Columns[2].ColumnWidth = 30;
-            oShtErrr.Columns[3].ColumnWidth = 40;
-            oShtErrr.Cells[1, 1] = "Trello Task #";
-            oShtErrr.Cells[1, 2] = "Code Section";
-            oShtErrr.Cells[1, 3] = "Error Description";
+            oShtTrlloScnErrr = oWB.Worksheets["Trello Scan Errors"];
+            oShtTrlloScnErrr.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
+            oShtTrlloScnErrr.Columns[1].ColumnWidth = 20;
+            oShtTrlloScnErrr.Columns[2].ColumnWidth = 30;
+            oShtTrlloScnErrr.Columns[3].ColumnWidth = 40;
+            oShtTrlloScnErrr.Cells[1, 1] = "Trello Task #";
+            oShtTrlloScnErrr.Cells[1, 2] = "Code Section";
+            oShtTrlloScnErrr.Cells[1, 3] = "Error Description";
 
-            oShtAllCrds = oWB.Worksheets.Add(oWB.Worksheets[1]);
-            oShtAllCrds.Name = "All Cards";
+            oShtAllCrds = oWB.Worksheets["All Cards"];
             oShtAllCrds.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
             oShtAllCrds.Columns[1].ColumnWidth = 20;
             oShtAllCrds.Columns[2].ColumnWidth = 30;
@@ -248,9 +246,7 @@ namespace MspUpdate
             oShtAllCrds.Cells[1, 4] = "Card ID";
             oShtAllCrds.Cells[1, 5] = "Labels";
 
-            oShtTsks = oWB.Worksheets.Add(oWB.Worksheets[1]);
-            oShtTsks.Name = "Tasks";
-            oShtTsks = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+            oShtTsks = oWB.Worksheets["Tasks"];
             oShtTsks.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
             oShtTsks.Columns[1].ColumnWidth = 10;
             oShtTsks.Columns[2].ColumnWidth = 10;
@@ -1029,14 +1025,14 @@ namespace MspUpdate
             //Sort the range by the sort column
             oRng.Sort(oRng.Columns[24, Type.Missing], Excel.XlSortOrder.xlAscending);
 
-            // Write board assignments data table to sheet Five-Sprint Export
-            oShtFvSprnt.Activate();
+            // Write board assignments data table to sheet Export 10K
+            oShtExprt10K.Activate();
             iRw1 = 1;
             foreach (DataRow TblRw in BrdAssgnmnts.Rows)
             {
                 iRw1 += 1;
-                oShtFvSprnt.Cells[iRw1, 1] = TblRw.Field<string>("CrdNm");
-                oShtFvSprnt.Cells[iRw1, 2] = TblRw.Field<string>("WrkPhsNm");
+                oShtExprt10K.Cells[iRw1, 1] = TblRw.Field<string>("CrdNm");
+                oShtExprt10K.Cells[iRw1, 2] = TblRw.Field<string>("WrkPhsNm");
 
                 // Task name: remove double quotes, leading - and +, leading blanks
                 if (TblRw.Field<string>("TskNm").IndexOf("-") == 0 || TblRw.Field<string>("TskNm").IndexOf("+") == 0)
@@ -1052,29 +1048,29 @@ namespace MspUpdate
                     Str1 = Str1.Substring(1, Str1.Length - 1);
                 }
                 Str1 = Str1.Replace("\"", string.Empty);
-                oShtFvSprnt.Cells[iRw1, 3] = Str1;
+                oShtExprt10K.Cells[iRw1, 3] = Str1;
 
-                oShtFvSprnt.Cells[iRw1, 4] = TblRw.Field<string>("Assgnd");
-                oShtFvSprnt.Cells[iRw1, 5] = TblRw.Field<float>("HrsActl");
-                oShtFvSprnt.Cells[iRw1, 6] = TblRw.Field<float>("HrsRmnng");
-                oShtFvSprnt.Cells[iRw1, 7] = TblRw.Field<string>("Lbls");
+                oShtExprt10K.Cells[iRw1, 4] = TblRw.Field<string>("Assgnd");
+                oShtExprt10K.Cells[iRw1, 5] = TblRw.Field<float>("HrsActl");
+                oShtExprt10K.Cells[iRw1, 6] = TblRw.Field<float>("HrsRmnng");
+                oShtExprt10K.Cells[iRw1, 7] = TblRw.Field<string>("Lbls");
 
-                oShtFvSprnt.Cells[iRw1, 8] = TblRw.Field<bool>("ErrrFnd");
+                oShtExprt10K.Cells[iRw1, 8] = TblRw.Field<bool>("ErrrFnd");
 
                 if (TblRw.Field<string>("ErrrTxt") != "")
                 {
-                    oShtFvSprnt.Cells[iRw1, 9] = TblRw.Field<string>("ErrrTxt");
+                    oShtExprt10K.Cells[iRw1, 9] = TblRw.Field<string>("ErrrTxt");
                     // Color row if error
-                    oRng = (Excel.Range)oShtFvSprnt.Range[oShtFvSprnt.Cells[iRw1, 1], oShtFvSprnt.Cells[iRw1, 15]];
+                    oRng = (Excel.Range)oShtExprt10K.Range[oShtExprt10K.Cells[iRw1, 1], oShtExprt10K.Cells[iRw1, 15]];
                     oRng.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
                 }
                 else
                 {
-                    oShtFvSprnt.Cells[iRw1, 9] = null;
+                    oShtExprt10K.Cells[iRw1, 9] = null;
                 }
 
                 // Card URL
-                oShtFvSprnt.Cells[iRw1, 10] = TblRw.Field<string>("CrdUrl");
+                oShtExprt10K.Cells[iRw1, 10] = TblRw.Field<string>("CrdUrl");
 
             }
 
