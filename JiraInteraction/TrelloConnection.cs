@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Security;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
 using Manatee.Trello;
 using Manatee.Trello.ManateeJson;
 using Manatee.Trello.WebApi;
-using Microsoft.Office.Core;
-using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
-using MSProject = Microsoft.Office.Interop.MSProject;
 
 
 namespace MspUpdate
@@ -67,6 +59,7 @@ namespace MspUpdate
 
             // Variables
             string Assgnd = "";
+            string[] BffrTkns = new string[] { "" };
             DataTable BrdAssgnmnts = new DataTable();
             String BrdNm = "";
             List<string> Brds = new List<string>();
@@ -86,6 +79,7 @@ namespace MspUpdate
             float EstmtL = -99;
             float EstmtP = -99;
             float HrsActl = -99;
+            Boolean HrsPrfxFnd;
             float HrsRmng = -99;
             DateTime IncldCrdsChngdAftr;
             int iRwAllCrds = 1;
@@ -95,6 +89,7 @@ namespace MspUpdate
             //string LblsCrd;
             string Lst;
             string MspExe;
+            MatchCollection Mtch;
             float Nmbr1;
             Excel.Range oRng;
             //Excel.Range oRngStrt;
@@ -111,7 +106,7 @@ namespace MspUpdate
             //String StryNm;
             var StryTsk = new Dictionary<string, string>();
             //string Tkn = "";
-            string[] Tkns = new string[] { "" };
+            List<string> Tkns = new List<string>();
             string[] Tkns1 = new string[] { "" };
             string[] Tkns2 = new string[] { "" };
             string[] Tkns3 = new string[] { "" };
@@ -447,7 +442,43 @@ namespace MspUpdate
                                 }
 
                                 // Parse tokens
-                                Tkns = Regex.Split(ChckItmNm.ToString(), " ");
+                                // Remove spaces in entered hrs
+                                BffrTkns = Regex.Split(ChckItmNm.ToString(), " ");
+
+                                Tkns.Clear();
+                                HrsPrfxFnd = false;
+                                foreach (var BffrTkn in BffrTkns)
+                                {
+                                    if (HrsPrfxFnd)
+                                    {
+                                        Mtch = Regex.Matches(BffrTkn, "[0-9.,]");
+                                        if (BffrTkn.Length == Mtch.Count)
+                                        {
+                                            Tkns[Tkns.Count-1] = Tkns[Tkns.Count-1] + BffrTkn;
+                                        }
+                                        else
+                                        {
+                                            Tkns.Add(BffrTkn);
+                                            if(BffrTkn.Contains("ar:") || BffrTkn.Contains("olp:"))
+                                            {
+                                                HrsPrfxFnd = true;
+                                            }
+                                            else
+                                            {
+                                                HrsPrfxFnd = false;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Tkns.Add(BffrTkn);
+                                        if (BffrTkn.Contains("ar:") || BffrTkn.Contains("olp:"))
+                                        {
+                                            HrsPrfxFnd = true;
+                                        }
+                                    }
+
+                                }
 
                                 // Select checklist items to process
                                 if (PstAllChckLstItms)
@@ -565,7 +596,7 @@ namespace MspUpdate
                                             else
                                             {
                                                 // hrs are in following token.
-                                                if (iTkn == Tkns.Length - 1)
+                                                if (iTkn == Tkns.Count - 1)
                                                 {
                                                     // At last token so error
                                                     ErrrAr = true;
@@ -575,14 +606,14 @@ namespace MspUpdate
                                                     // Look for next non-blank token
                                                     {
                                                         iTkn++;
-                                                        if (iTkn < Tkns.Length)
+                                                        if (iTkn < Tkns.Count)
                                                         {
                                                             if (Tkns[iTkn] != "")
                                                             {
                                                                 StrHrs = Tkns[iTkn];
                                                             }
                                                         }
-                                                    } while (StrHrs == "" && iTkn < Tkns.Length) ;
+                                                    } while (StrHrs == "" && iTkn < Tkns.Count) ;
                                                 }
                                             }
 
@@ -666,7 +697,7 @@ namespace MspUpdate
                                             else
                                             {
                                                 // hrs are in following token.
-                                                if (iTkn == Tkns.Length - 1)
+                                                if (iTkn == Tkns.Count - 1)
                                                 {
                                                     // At last token so error
                                                     ErrrOlp = true;
@@ -676,14 +707,14 @@ namespace MspUpdate
                                                     // Look for next non-blank token
                                                     {
                                                         iTkn++;
-                                                        if (iTkn < Tkns.Length)
+                                                        if (iTkn < Tkns.Count)
                                                         {
                                                             if (Tkns[iTkn] != "")
                                                             {
                                                                 StrHrs = Tkns[iTkn];
                                                             }
                                                         }
-                                                    } while (StrHrs == "" && iTkn < Tkns.Length) ;
+                                                    } while (StrHrs == "" && iTkn < Tkns.Count) ;
                                                 }
                                             }
 
@@ -802,7 +833,7 @@ namespace MspUpdate
 
                                         iTkn++;
 
-                                    } while (iTkn < Tkns.Length); // End token processing loop
+                                    } while (iTkn < Tkns.Count); // End token processing loop
 
                                     // If errors found then fill error text
                                     // Task name not found
