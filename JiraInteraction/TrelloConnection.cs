@@ -342,15 +342,19 @@ namespace MspUpdate
 
                     // Get card priority
                     CrdPrty = "unknown";
-                    if (Lbls.Contains("priority-high"))
+                    if (Lbls.Contains("priority0-critical") || Lbls.Contains("priority-critical"))
+                    {
+                        CrdPrty = "critical";
+                    }
+                    if (Lbls.Contains("priority1-high") || Lbls.Contains("priority-high"))
                     {
                         CrdPrty = "high";
                     }
-                    if (Lbls.Contains("priority-medium"))
+                    if (Lbls.Contains("priority2-med") || Lbls.Contains("priority-medium"))
                     {
                         CrdPrty = "medium";
                     }
-                    if (Lbls.Contains("priority-low"))
+                    if (Lbls.Contains("priority3-low") || Lbls.Contains("priority-low"))
                     {
                         CrdPrty = "low";
                     }
