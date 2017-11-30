@@ -91,6 +91,8 @@ namespace MspUpdate
             string MspExe;
             MatchCollection Mtch;
             float Nmbr1;
+            bool NtMrkrCrd;
+            bool NtTmpltCrd;
             Excel.Range oRng;
             //Excel.Range oRngStrt;
             //Excel.Range oRngEnd;
@@ -342,21 +344,21 @@ namespace MspUpdate
 
                     // Get card priority
                     CrdPrty = "unknown";
-                    if (Lbls.Contains("priority0-critical") || Lbls.Contains("priority-critical"))
+                    if (Lbls.Contains("priority3-low") || Lbls.Contains("priority-low"))
                     {
-                        CrdPrty = "critical";
-                    }
-                    if (Lbls.Contains("priority1-high") || Lbls.Contains("priority-high"))
-                    {
-                        CrdPrty = "high";
+                        CrdPrty = "low";
                     }
                     if (Lbls.Contains("priority2-med") || Lbls.Contains("priority-medium"))
                     {
                         CrdPrty = "medium";
                     }
-                    if (Lbls.Contains("priority3-low") || Lbls.Contains("priority-low"))
+                    if (Lbls.Contains("priority1-high") || Lbls.Contains("priority-high"))
                     {
-                        CrdPrty = "low";
+                        CrdPrty = "high";
+                    }
+                    if (Lbls.Contains("priority0-critical") || Lbls.Contains("priority-critical"))
+                    {
+                        CrdPrty = "critical";
                     }
 
 
@@ -396,8 +398,22 @@ namespace MspUpdate
                         InInclddDts = false;
                     }
 
+                    // Marker card
+                    NtMrkrCrd = true;
+                    if (Lbls.Contains("marker"))
+                    {
+                        NtMrkrCrd = false;
+                    }
+
+                    // Template3 card
+                    NtTmpltCrd = true;
+                    if (CrdNm.Contains("<TEMPLATE>"))
+                    {
+                        NtTmpltCrd = false;
+                    }
+
                     // Write card to sheet All Cards
-                    if (TrlloLstFnd && InInclddDts)
+                    if (TrlloLstFnd && InInclddDts && NtTmpltCrd && NtMrkrCrd)
                     {
                         oShtAllCrds.Activate();
                         iRwAllCrds++;
@@ -420,7 +436,7 @@ namespace MspUpdate
                         DbgIncldThsCrd = true;
                     }
 
-                    if (DbgIncldThsCrd && TrlloLstFnd && InInclddDts)
+                    if (DbgIncldThsCrd && TrlloLstFnd && InInclddDts && NtTmpltCrd && NtMrkrCrd)
                     {
                         // Read checklists
                         foreach (var chkList in card.CheckLists)
