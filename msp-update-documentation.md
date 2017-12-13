@@ -28,7 +28,7 @@ Parameters for Update Measures.  In the config file the parameter name is prefix
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
 | Measure Labels | Labels for which measures will be calculated. A set of measures is calculated and posted for each measure label plus all tasks. | blank | n |
-| Trello Lists Open | Trello lists containing open work items.  Cards on these lists will be included in the counts on the Bug & Change Open report.  List names are separated by semi-colons. | blank | y |
+| Trello Lists Not Open | Trello lists containing work items that are not open.  List names are separated by semi-colons.  Cards on these lists will not be included in the counts on the Bug & Change Open report.  All non-open lists should be included, even if they are included in the Excluded or Rejected lists.  | blank | y |
 
 
 Parameters for Update Projection.  They are prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
