@@ -3,4 +3,4 @@
 [OpenStax Development Metrics](https://openstax.github.io/work-management-reports/openstax_development_metrics)
 
 ## Program Documentation
-[MSP Update](https://openstax.github.io/work-management-reports/msp-update-documentation)
+[MSP Update](https://openstax.github.io/work-management/msp-update-documentation)
