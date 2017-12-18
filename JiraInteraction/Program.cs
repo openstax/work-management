@@ -347,7 +347,7 @@ namespace MspUpdate
             PrmsFnd.XlsFlNm = true;
             PrmsFnd.XlsOutptDrctry = true;
 
-            // Read config file
+            // Read config file 
             // string UsrNm = Environment.UserName;
             System.IO.StreamReader file = new System.IO.StreamReader(CnfgFlPth);
             while ((ln = file.ReadLine()) != null)

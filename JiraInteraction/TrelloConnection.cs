@@ -1251,7 +1251,7 @@ namespace MspUpdate
             Console.Write("\r\nMSP update completed at " + Tm);
             oShtExec.Cells[9, 2] = Tm;
 
-            // Close xls
+            // Close xls 
             //oXL.Visible = false;
             oWB.Save();
             oWB.Close();
