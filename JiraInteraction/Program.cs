@@ -7,23 +7,52 @@ namespace MspUpdate
 {
     public class Configuration
     {
-        public bool DbgUsr;
         public List<string> Brds = new List<string>();
+        public bool DbgUsr;
+        public DateTime IncldCrdsChngdAftr;
+        public string MspExe;
+        public string MspPrjctNm;
+        public bool PrmsOk;
+        public bool PstAllChckLstItms;
+        public bool PstChckItmNm;
+        public string TrlloAppKy;
         public List<string> TrlloLstsIncldd = new List<string>();
+        public List<string> TrlloLstsInclddInpt = new List<string>();
         public List<string> TrlloLstsExcldd = new List<string>();
+        public List<string> TrlloLstsExclddInpt = new List<string>();
+        public List<string> TrlloLstsNtOpn = new List<string>();
+        public List<string> TrlloLstsRjctd = new List<string>();
+        public string TrlloUsrTkn;
+        public DateTime UpdtDt;
         public bool UpdtMspActls;
         public bool UpdtMspMsrs;
         public bool UpdtMspPrjctd;
-        public DateTime UpdtDt;
-        public string MspExe;
-        public string MspPrjctNm;
-        public bool PstAllChckLstItms;
-        public DateTime IncldCrdsChngdAftr;
-        public string TrlloAppKy;
-        public string TrlloUsrTkn;
         public string XlsFlNm;
         public string XlsOutptDrctry;
     }
+
+    public class ParmsFound
+    {
+        public bool Brds;
+        public bool IncldCrdsChngdAftr;
+        public bool MspExe;
+        public bool MspPrjctNm;
+        public bool PstAllChckLstItms;
+        public bool PstChckItmNm;
+        public bool TrlloAppKy;
+        public bool TrlloLstsInclddInpt;
+        public bool TrlloLstsExclddInpt;
+        public bool TrlloLstsNtOpn;
+        public bool TrlloLstsRjctd;
+        public bool TrlloUsrTkn;
+        public bool UpdtDt;
+        public bool UpdtMspActls;
+        public bool UpdtMspMsrs;
+        public bool UpdtMspPrjctd;
+        public bool XlsFlNm;
+        public bool XlsOutptDrctry;
+    }
+
     class Program
     {
 
@@ -71,9 +100,10 @@ namespace MspUpdate
             string CnfgFlPth = "";
             bool CnslInpt = true;
             bool DbgExec = false;
+            DateTime DtNll = new DateTime(1800, 1, 1);
             DateTime DtToUpdt = DateTime.Today;
             // string strDtToUpdt;
-            DateTime IncldCrdsChngdAftr = new DateTime(1900, 1, 1);
+            DateTime IncldCrdsChngdAftr = DtNll;
             string MspExe = "";
             //string MspPrjctNm;
             string Prjct = "";
@@ -173,10 +203,13 @@ namespace MspUpdate
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
-                        // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        if (Cnfg.PrmsOk)
+                        {
+                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+
+                        }
 
                         loop = false;
                         break;
@@ -249,7 +282,14 @@ namespace MspUpdate
             // Pause if console input 
             if (CnslInpt)
             {
-                Console.WriteLine("\r\nAll done...hit Enter to exit");
+                if (Cnfg.PrmsOk)
+                {
+                    Console.WriteLine("\r\nAll done...hit Enter to exit");
+                }
+                else
+                {
+                    Console.WriteLine("\r\nAborting...hit Enter to exit");
+                }
                 Console.ReadLine();
             }
         }
@@ -257,11 +297,55 @@ namespace MspUpdate
         {
             List<string> Lst = new List<string>();
             var Cnfg = new Configuration();
+            DateTime DtNll = new DateTime(1800, 1, 1);
             int cntr = 0;
             string ln;
+            var PrmsFnd = new ParmsFound();
             var Prms = new Dictionary<string, string>();
             string[] Tkns = new string[] { "" };
-            string Str1; 
+            string Str1;
+
+            // Initial values
+            Cnfg.Brds.Clear();
+            Cnfg.DbgUsr = false;
+            Cnfg.IncldCrdsChngdAftr = DateTime.Today.AddDays(-3);  
+            Cnfg.MspExe = "";
+            Cnfg.MspPrjctNm = "";
+            Cnfg.PstAllChckLstItms = false;
+            Cnfg.PstChckItmNm = false;
+            Cnfg.TrlloAppKy = "";
+            Cnfg.TrlloLstsExcldd.Clear();
+            Cnfg.TrlloLstsExclddInpt.Clear();
+            Cnfg.TrlloLstsIncldd.Clear();
+            Cnfg.TrlloLstsInclddInpt.Clear();
+            Cnfg.TrlloLstsNtOpn.Clear();
+            Cnfg.TrlloLstsRjctd.Clear();
+            Cnfg.TrlloUsrTkn = "";
+            Cnfg.UpdtDt = DateTime.Today;
+            Cnfg.UpdtMspActls = false;
+            Cnfg.UpdtMspMsrs = false;
+            Cnfg.UpdtMspPrjctd = false;
+            Cnfg.XlsFlNm = "";
+            Cnfg.XlsOutptDrctry = "";
+
+            PrmsFnd.Brds = true;
+            PrmsFnd.IncldCrdsChngdAftr = true;
+            PrmsFnd.MspExe = true;
+            PrmsFnd.MspPrjctNm = true;
+            PrmsFnd.PstAllChckLstItms = true;
+            PrmsFnd.PstChckItmNm = true;
+            PrmsFnd.TrlloAppKy = true;
+            PrmsFnd.TrlloLstsExclddInpt = true;
+            PrmsFnd.TrlloLstsInclddInpt = true;
+            PrmsFnd.TrlloLstsNtOpn = true;
+            PrmsFnd.TrlloLstsRjctd = true;
+            PrmsFnd.TrlloUsrTkn = true;
+            PrmsFnd.UpdtDt = true;
+            PrmsFnd.UpdtMspActls = true;
+            PrmsFnd.UpdtMspMsrs = true;
+            PrmsFnd.UpdtMspPrjctd = true;
+            PrmsFnd.XlsFlNm = true;
+            PrmsFnd.XlsOutptDrctry = true;
 
             // Read config file
             // string UsrNm = Environment.UserName;
@@ -278,68 +362,300 @@ namespace MspUpdate
             file.Close();
 
             //Get parms
-            Str1 = Prms[Prjct + ":Debug"];
-            //Cnfg.DbgUsr = Convert.ToBoolean(Str1);
-
-            Cnfg.TrlloAppKy = Prms["Trello AppKey"];
-            Cnfg.TrlloUsrTkn = Prms["Trello UserToken"];
-            Cnfg.MspExe = Prms["MS Project Exe"];
-            Cnfg.XlsOutptDrctry = Prms["Xls Output Directory"];
-            Cnfg.MspPrjctNm = Prms[Prjct + ":MSP Project Name"];
-
-            Lst.Clear();
-            Str1 = Prms[Prjct + ":Boards"];
-            Tkns = Regex.Split(Str1, ";");
-            foreach (string Tkn in Tkns)
+            try
             {
-                if (Tkn != "")
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":Boards"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
                 {
-                    Cnfg.Brds.Add(Tkn);
+                    if (Tkn != "")
+                    {
+                        Cnfg.Brds.Add(Tkn);
+                    }
                 }
             }
-
-            Lst.Clear();
-            Str1 = Prms[Prjct + ":Trello Lists Included"];
-            Tkns = Regex.Split(Str1, ";");
-            foreach (string Tkn in Tkns)
+            catch
             {
-                if (Tkn != "")
-                {
-                    Cnfg.TrlloLstsIncldd.Add(Tkn);
-                }
+                PrmsFnd.Brds = false;
             }
 
-            Lst.Clear();
-            Str1 = Prms[Prjct + ":Trello Lists Excluded"];
-            Tkns = Regex.Split(Str1, ";");
-            foreach (string Tkn in Tkns)
+            if (Cnfg.Brds.Count == 0)
             {
-                if (Tkn != "")
-                {
-                    Cnfg.TrlloLstsExcldd.Add(Tkn);
-                }
+                PrmsFnd.Brds = false;
+            }
+            try
+            {
+                Str1 = Prms[Prjct + ":Debug"];
+                Cnfg.DbgUsr = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                Cnfg.DbgUsr = false;
             }
 
-            Str1 = Prms[Prjct + ":Update MSP Actuals"];
-            Cnfg.UpdtMspActls = Convert.ToBoolean(Str1);
+            try
+            {
+                Str1 = Prms[Prjct + ":Include Cards Changed After"];
+                Cnfg.IncldCrdsChngdAftr = Convert.ToDateTime(Str1);
+            }
+            catch
+            {
+                PrmsFnd.IncldCrdsChngdAftr = false;
+            }
 
-            Str1 = Prms[Prjct + ":Update MSP Measures"];
-            Cnfg.UpdtMspMsrs = Convert.ToBoolean(Str1);
+            try
+            {
+                Cnfg.MspExe = Prms["MS Project Exe"];
+            }
+            catch
+            {
+                PrmsFnd.MspExe = false;
+            }
 
-            Str1 = Prms[Prjct + ":Update MSP Projected"];
-            Cnfg.UpdtMspPrjctd = Convert.ToBoolean(Str1);
+            try
+            {
+                Cnfg.MspPrjctNm = Prms[Prjct + ":MSP Project Name"];
+            }
+            catch
+            {
+                PrmsFnd.MspPrjctNm = false;
+            }
 
-            Str1 = Prms[Prjct + ":Post All Checklist Items"];
-            Cnfg.PstAllChckLstItms = Convert.ToBoolean(Str1);
+            try
+            {
+                Str1 = Prms[Prjct + ":Post Checkitem Name"];
+                Cnfg.PstChckItmNm = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                PrmsFnd.PstChckItmNm = false;
+            }
 
-            Str1 = Prms[Prjct + ":Include Cards Changed After"];
-            Cnfg.IncldCrdsChngdAftr = Convert.ToDateTime(Str1);
+            try
+            {
+                Str1 = Prms[Prjct + ":Post All Checklist Items"];
+                Cnfg.PstAllChckLstItms = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                PrmsFnd.PstAllChckLstItms = false;
+            }
 
-            Cnfg.XlsFlNm = Prms[Prjct + ":Xls File Name"];
+            try
+            {
+                Cnfg.TrlloAppKy = Prms["Trello AppKey"];
+            }
+            catch
+            {
+                PrmsFnd.TrlloAppKy = false;
+            }
+
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":Trello Lists Included"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.TrlloLstsInclddInpt.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.TrlloLstsInclddInpt = false;
+            }
+
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":Trello Lists Excluded"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.TrlloLstsExclddInpt.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.TrlloLstsExclddInpt = false;
+            }
+
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":Trello Lists Not Open"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.TrlloLstsNtOpn.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.TrlloLstsNtOpn = false;
+            }
+
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":Trello Lists Rejected"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.TrlloLstsRjctd.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.TrlloLstsRjctd = false;
+            }
+
+            try
+            {
+                Cnfg.TrlloUsrTkn = Prms["Trello UserToken"];
+            }
+            catch
+            {
+                PrmsFnd.TrlloUsrTkn = false;
+            }
+
+            try
+            {
+                Str1 = Prms[Prjct + ":Update Date"];
+                Cnfg.UpdtDt = Convert.ToDateTime(Str1);
+            }
+            catch
+            {
+                PrmsFnd.UpdtDt = false;
+            }
+
+            try
+            {
+                Str1 = Prms[Prjct + ":Update MSP Actuals"];
+                Cnfg.UpdtMspActls = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                PrmsFnd.UpdtMspActls = false;
+            }
+
+            try
+            {
+                Str1 = Prms[Prjct + ":Update MSP Measures"];
+                Cnfg.UpdtMspMsrs = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                PrmsFnd.UpdtMspMsrs = false;
+            }
+
+            try
+            {
+                Str1 = Prms[Prjct + ":Update MSP Projected"];
+                Cnfg.UpdtMspPrjctd = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                PrmsFnd.UpdtMspPrjctd = false;
+            }
+
+            try
+            {
+                Cnfg.XlsOutptDrctry = Prms["Xls Output Directory"];
+            }
+            catch
+            {
+                PrmsFnd.XlsOutptDrctry = false;
+            }
+
+            try
+            {
+                Cnfg.XlsFlNm = Prms[Prjct + ":Xls File Name"];
+            }
+            catch
+            {
+                PrmsFnd.XlsFlNm = false;
+            }
 
             Console.WriteLine("Update MSP Actuals = " + Cnfg.UpdtMspActls);
             Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
             Console.WriteLine("Update MSP Measures = " + Cnfg.UpdtMspMsrs);
+
+            Cnfg.PrmsOk = true;
+            if (!(PrmsFnd.Brds && PrmsFnd.MspExe && PrmsFnd.MspPrjctNm && PrmsFnd.TrlloAppKy
+                && PrmsFnd.TrlloLstsExclddInpt && PrmsFnd.TrlloLstsInclddInpt && PrmsFnd.TrlloLstsNtOpn
+                && PrmsFnd.TrlloLstsRjctd && PrmsFnd.TrlloUsrTkn && PrmsFnd.XlsFlNm && PrmsFnd.XlsOutptDrctry))
+            {
+                Cnfg.PrmsOk = false;
+                Console.WriteLine("\n\r");
+                if (!PrmsFnd.Brds)
+                {
+                    Console.WriteLine("ERROR missing parm: Boards");
+                }
+
+                if (!PrmsFnd.MspExe)
+                {
+                    Console.WriteLine("ERROR missing parm: MS Project Exe");
+                }
+
+                if (!PrmsFnd.MspPrjctNm)
+                {
+                    Console.WriteLine("ERROR missing parm: MSP Project Name");
+                }
+
+                if (!PrmsFnd.TrlloAppKy)
+                {
+                    Console.WriteLine("ERROR missing parm: Trello AppKey");
+                }
+
+                if (!PrmsFnd.TrlloLstsExclddInpt)
+                {
+                    Console.WriteLine("ERROR missing parm: Trello Lists Excluded");
+                }
+
+                if (!PrmsFnd.TrlloLstsInclddInpt)
+                {
+                    Console.WriteLine("ERROR missing parm: Trello Lists Included");
+                }
+
+                if (!PrmsFnd.TrlloLstsNtOpn)
+                {
+                    Console.WriteLine("ERROR missing parm: Trello Lists Not Open");
+                }
+
+                if (!PrmsFnd.TrlloLstsRjctd)
+                {
+                    Console.WriteLine("ERROR missing parm: Trello Lists Rejected");
+                }
+
+                if (!PrmsFnd.TrlloUsrTkn)
+                {
+                    Console.WriteLine("ERROR missing parm: Trello UserToken");
+                }
+
+                if (!PrmsFnd.XlsFlNm)
+                {
+                    Console.WriteLine("ERROR missing parm: Xls File Name");
+                }
+
+                if (!PrmsFnd.XlsOutptDrctry)
+                {
+                    Console.WriteLine("ERROR missing parm: Xls Output Directory");
+                }
+            }
 
             return Cnfg;
         }
