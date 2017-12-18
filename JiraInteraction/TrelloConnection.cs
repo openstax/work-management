@@ -14,7 +14,6 @@ namespace MspUpdate
 {
     public class TrelloConnection
     {
-        Board board = null;
         Dictionary<string, List<string>> cardSorted = new Dictionary<string, List<string>>();
         List<string> noLabelTickets = new List<string>();
 
@@ -61,6 +60,7 @@ namespace MspUpdate
             string Assgnd = "";
             string[] BffrTkns = new string[] { "" };
             DataTable BrdAssgnmnts = new DataTable();
+            //Board Brd;
             String BrdNm = "";
             List<string> Brds = new List<string>();
             string CrdId = "";
@@ -88,6 +88,8 @@ namespace MspUpdate
             string Lbls;
             //string LblsCrd;
             string Lst;
+            List<string> LstsExcldd = new List<string>();
+            List<string> LstsIncldd = new List<string>();
             string MspExe;
             MatchCollection Mtch;
             float Nmbr1;
@@ -114,8 +116,8 @@ namespace MspUpdate
             string[] Tkns3 = new string[] { "" };
             string Tm;
             //string TrllNm = ""; // Trello username
-            List<string> TrlloLstsIncldd = new List<string>();
-            List<string> TrlloLstsExcldd = new List<string>();
+            List<string> TrlloLstsInclddInpt = new List<string>();
+            List<string> TrlloLstsExclddInpt = new List<string>();
             bool TskFnd;
             string TskId = "";
             string TskNm = "";
@@ -156,8 +158,8 @@ namespace MspUpdate
             UpdtMspPrjctd = Cnfg.UpdtMspPrjctd;
             PstAllChckLstItms = Cnfg.PstAllChckLstItms;
             IncldCrdsChngdAftr = Cnfg.IncldCrdsChngdAftr;
-            TrlloLstsIncldd = Cnfg.TrlloLstsIncldd;
-            TrlloLstsExcldd = Cnfg.TrlloLstsExcldd;
+            TrlloLstsInclddInpt = Cnfg.TrlloLstsInclddInpt;
+            TrlloLstsExclddInpt = Cnfg.TrlloLstsExclddInpt;
 
 
 
@@ -293,29 +295,145 @@ namespace MspUpdate
             oShtTsks.Cells[1, 22] = "Card URL";
             oShtTsks.Cells[1, 23] = "Card Last Activity";
             oShtTsks.Cells[1, 24] = "Sort";
+            
+            // Debug: Cards to be read for debug
+            Boolean Dbg = false;
+            Crds.Add("57e046ca970fb81e9e789ea6");
 
+            // Loop for each board
             foreach (string BrdId in Brds)
             {
-                //Read Board and cards in a board
-                var board = new Board(BrdId);
-
                 // Board data elements
-                try
+                var Brd = new Board(BrdId);
+                BrdNm = Brd.Name;
+                //try
+                //{
+                //    var Brd = new Board(BrdId);
+                //    BrdNm = Brd.Name;
+                //}
+                //catch (Manatee.Trello.Exceptions.TrelloInteractionException xcptn)
+                //{
+                //    Console.WriteLine("Error: '{0}'", xcptn.Message);
+                //}
+
+                // Find Trello lists to be included and excluded.  Write them to xls exec tab.
+                bool IncldLst;
+                if (TrlloLstsInclddInpt.Count == 0 && TrlloLstsExclddInpt.Count == 0)
                 {
-                    BrdNm = board.Name;
+                    foreach (List BrdLst in Brd.Lists)
+                    {
+                        Cnfg.TrlloLstsIncldd.Add(BrdLst.Name);
+                    }
                 }
-                catch (Manatee.Trello.Exceptions.TrelloInteractionException xcptn)
+
+                if (TrlloLstsInclddInpt.Count != 0 && TrlloLstsExclddInpt.Count == 0)
                 {
-                    Console.WriteLine("Error: '{0}'", xcptn.Message);
+                    foreach (List BrdLst in Brd.Lists)
+                    {
+                        IncldLst = false;
+                        foreach (string Tlst in TrlloLstsInclddInpt )
+                        {
+                            if (BrdLst.Name == Tlst)
+                            {
+                                IncldLst = true;
+                            }
+                        }
+
+                        if (IncldLst)
+                        {
+                            Cnfg.TrlloLstsIncldd.Add(BrdLst.Name);
+                        }
+                        else
+                        {
+                            Cnfg.TrlloLstsExcldd.Add(BrdLst.Name);
+                        }
+                    }
                 }
 
+                if (TrlloLstsInclddInpt.Count == 0 && TrlloLstsExclddInpt.Count != 0)
+                {
+                    foreach (List BrdLst in Brd.Lists)
+                    {
+                        IncldLst = true;
+                        foreach (string Tlst in TrlloLstsExclddInpt)
+                        {
+                            if (BrdLst.Name == Tlst)
+                            {
+                                IncldLst = false;
+                            }
+                        }
 
-                // Debug: Cards to be read for debug
-                Boolean Dbg = false;
-                Crds.Add("57e046ca970fb81e9e789ea6");
+                        if (IncldLst)
+                        {
+                            Cnfg.TrlloLstsIncldd.Add(BrdLst.Name);
+                        }
+                        else
+                        {
+                            Cnfg.TrlloLstsExcldd.Add(BrdLst.Name);
+                        }
+                    }
+                }
 
-                int cntCrds = board.Cards.Count();
-                foreach (var card in board.Cards)
+                if (TrlloLstsInclddInpt.Count != 0 && TrlloLstsExclddInpt.Count != 0)
+                {
+                    foreach (List BrdLst in Brd.Lists)
+                    {
+                        IncldLst = false;
+                        foreach (string Tlst in TrlloLstsInclddInpt)
+                        {
+                            if (BrdLst.Name == Tlst)
+                            {
+                                IncldLst = true;
+                            }
+                        }
+
+                        foreach (string Tlst in TrlloLstsExclddInpt)
+                        {
+                            if (BrdLst.Name == Tlst)
+                            {
+                                IncldLst = false;
+                            }
+                        }
+
+                        if (IncldLst)
+                        {
+                            Cnfg.TrlloLstsIncldd.Add(BrdLst.Name);
+                        }
+                        else
+                        {
+                            Cnfg.TrlloLstsExcldd.Add(BrdLst.Name);
+                        }
+                    }
+                }
+
+                // Write lists of lists to xls tab Exec.
+                oShtExec.Cells[12, 1] = "Lists Included";
+                iRw1 = 12;
+                foreach(string LstNm in Cnfg.TrlloLstsIncldd)
+                {
+                    iRw1++;
+                    oShtExec.Cells[iRw1, 1] = LstNm;
+                }
+
+                oShtExec.Cells[12, 2] = "Lists Excluded";
+                iRw1 = 12;
+                foreach (string LstNm in Cnfg.TrlloLstsExcldd)
+                {
+                    iRw1++;
+                    oShtExec.Cells[iRw1, 2] = LstNm;
+                }
+
+                oShtExec.Cells[12, 3] = "Lists Rejected";
+                iRw1 = 12;
+                foreach (string LstNm in Cnfg.TrlloLstsRjctd)
+                {
+                    iRw1++;
+                    oShtExec.Cells[iRw1, 3] = LstNm;
+                }
+
+                // Loop for each card on board
+                int cntCrds = Brd.Cards.Count();
+                foreach (var card in Brd.Cards)
                 {
 
                     // Get card info
@@ -362,30 +480,16 @@ namespace MspUpdate
                     }
 
 
-                    // Trello Lists included and excluded
+                    // Check that card is on an included Trello List.
                     bool TrlloLstFnd = true;
-                    if (TrlloLstsIncldd.Count != 0)
+                    if (Cnfg.TrlloLstsIncldd.Count != 0)
                     {
                         TrlloLstFnd = false;
-                        foreach (string TrlloLst in TrlloLstsIncldd)
+                        foreach (string TrlloLst in Cnfg.TrlloLstsIncldd)
                         {
                             if (card.List.Name.Equals(TrlloLst))
                             {
                                 TrlloLstFnd = true;
-                            }
-                        }
-                    }
-
-                    if (TrlloLstsExcldd.Count != 0)
-                    {
-                        if (TrlloLstFnd == true)
-                        {
-                            foreach (string TrlloLst in TrlloLstsExcldd)
-                            {
-                                if (card.List.Name.Equals(TrlloLst))
-                                {
-                                    TrlloLstFnd = false;
-                                }
                             }
                         }
                     }
@@ -417,7 +521,7 @@ namespace MspUpdate
                     {
                         oShtAllCrds.Activate();
                         iRwAllCrds++;
-                        oShtAllCrds.Cells[iRwAllCrds, 1] = board.Name;
+                        oShtAllCrds.Cells[iRwAllCrds, 1] = Brd.Name;
                         oShtAllCrds.Cells[iRwAllCrds, 2] = card.List.Name;
                         oShtAllCrds.Cells[iRwAllCrds, 3] = card.Name;
                         oShtAllCrds.Cells[iRwAllCrds, 4] = card.Id;
