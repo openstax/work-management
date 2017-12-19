@@ -21,6 +21,7 @@ namespace MspUpdate
         public List<string> TrlloLstsExcldd = new List<string>();
         public List<string> TrlloLstsExclddInpt = new List<string>();
         public List<string> TrlloLstsNtOpn = new List<string>();
+        public List<string> TrlloLstsOpn = new List<string>();
         public List<string> TrlloLstsRjctd = new List<string>();
         public string TrlloUsrTkn;
         public DateTime UpdtDt;

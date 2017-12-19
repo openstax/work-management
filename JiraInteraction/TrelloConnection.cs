@@ -406,8 +406,17 @@ namespace MspUpdate
                     }
                 }
 
+                // Find Trello lists that are open and closed.
+                foreach (List BrdLst in Brd.Lists)
+                {
+                    if (!Cnfg.TrlloLstsNtOpn.Contains(BrdLst.Name))
+                    {
+                        Cnfg.TrlloLstsOpn.Add(BrdLst.Name);
+                    }
+                }
+
                 // Write lists of lists to xls tab Exec.
-                oShtExec.Cells[12, 1] = "Lists Included";
+                oShtExec.Cells[12, 1] = "Lists included in the Trello scan";
                 iRw1 = 12;
                 foreach(string LstNm in Cnfg.TrlloLstsIncldd)
                 {
@@ -415,7 +424,7 @@ namespace MspUpdate
                     oShtExec.Cells[iRw1, 1] = LstNm;
                 }
 
-                oShtExec.Cells[12, 2] = "Lists Excluded";
+                oShtExec.Cells[12, 2] = "Lists excluded from the Trello scan";
                 iRw1 = 12;
                 foreach (string LstNm in Cnfg.TrlloLstsExcldd)
                 {
@@ -423,13 +432,30 @@ namespace MspUpdate
                     oShtExec.Cells[iRw1, 2] = LstNm;
                 }
 
-                oShtExec.Cells[12, 3] = "Lists Rejected";
+                oShtExec.Cells[12, 3] = "Lists contining rejected cards.  Tasks for these cards will be deleted in Project Online.";
                 iRw1 = 12;
                 foreach (string LstNm in Cnfg.TrlloLstsRjctd)
                 {
                     iRw1++;
                     oShtExec.Cells[iRw1, 3] = LstNm;
                 }
+
+                oShtExec.Cells[12, 4] = "Lists containing cards that are open";
+                iRw1 = 12;
+                foreach (string LstNm in Cnfg.TrlloLstsOpn)
+                {
+                    iRw1++;
+                    oShtExec.Cells[iRw1, 4] = LstNm;
+                }
+
+                oShtExec.Cells[12, 5] = "Lists containing cards that are not open";
+                iRw1 = 12;
+                foreach (string LstNm in Cnfg.TrlloLstsNtOpn)
+                {
+                    iRw1++;
+                    oShtExec.Cells[iRw1, 5] = LstNm;
+                }
+
 
                 // Loop for each card on board
                 int cntCrds = Brd.Cards.Count();
