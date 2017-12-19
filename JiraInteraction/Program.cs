@@ -205,11 +205,11 @@ namespace MspUpdate
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
 
+                        // Read boards
                         if (Cnfg.PrmsOk)
                         {
                             XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
                             trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-
                         }
 
                         loop = false;
@@ -220,11 +220,13 @@ namespace MspUpdate
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
 
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-
+                        if (Cnfg.PrmsOk)
+                        {
+                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        }
                         loop = false;
                         break;
 
@@ -233,10 +235,13 @@ namespace MspUpdate
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
-
+                        
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        if (Cnfg.PrmsOk)
+                        {
+                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        }
 
                         loop = false;
                         break;
@@ -246,10 +251,13 @@ namespace MspUpdate
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
-
+                        
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        if (Cnfg.PrmsOk)
+                        {
+                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        }
 
                         loop = false;
                         break;
@@ -259,10 +267,13 @@ namespace MspUpdate
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
-
+                        
                         // Read boards
-                        trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        if (Cnfg.PrmsOk)
+                        {
+                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        }
 
                         loop = false;
                         break;
