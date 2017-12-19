@@ -6,15 +6,17 @@ Parameters which control program execution.  In the config file the parameter na
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
+| MSP Project Name | Name of the project to be updated in Project Online. | FALSE | y |
 | Update MSP Actuals | If TRUE then run the Actuals Update. | FALSE | y |
 | Update MSP Projected | If TRUE then run the Projection Update. | FALSE | y |
 | Update MSP Measures | If TRUE then run the Measures Update. | FALSE | y |
+| Debug | If TRUE then print run progress notes to the console. | FALSE | y |
 
 Parameters for Update Actual.  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
-| Boards | Trello boards to be scanned. | blank | n |
+| Boards | Trello boards to be scanned. | blank | y |
 | Include Cards Changed After | Trello scan is limited to cards changed after the specified date. | 3 days before today | n |
 | Post All Checklist Items | If TRUE then all checklist items on each card will be posted to Project Online.  If FALSE then only task checklist items (those containing "ar:") will be posted. | FALSE | n |
 | Post Checkitem Name | If TRUE then the entire Trello checkitem name will be posted as the task name in Project, truncated to 255 chars. | FALSE | n |
@@ -22,6 +24,7 @@ Parameters for Update Actual.  In the config file the parameter name is prefixed
 | Trello Lists Excluded | Trello lists to be excluded from the scan.  List names are separated by semi-colons. | blank | y |
 | Trello Lists Rejected | Trello lists containing rejected work items.  Cards on these lists will be deleted from the schedule by Update Actuals. List names are separated by semi-colons. | blank | y |
 | Update Date | Date which specifies when hrs are posted in Project.  Actual work is posted the day before this date.  Remaining work is posted on this date. | today | n |
+| Xls File Name | File name for output xls file. | blank | y |
 
 Parameters for Update Measures.  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
@@ -51,3 +54,7 @@ These parameters are used for all projects.  The parameter name is entered witho
 | Trello AppKey | Application Key required for Trello access. | None | y |
 | Trello User Token | User Token required for Trello access. | None | y |
 | Xls Output Directory | Directory where output xls file will be created. | None | y |
+
+## About running the update
+* Setting all Update parms to FALSE will generate the xls but not update Project.
+* When the Project update starts, it's a good idea to bring up the Project window.  If the schedule does not appear it's a good idea to start over.  The job can be interrupted without hurting either the xls file or the schedule in the Project client.
