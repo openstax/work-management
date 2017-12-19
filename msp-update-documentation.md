@@ -59,6 +59,6 @@ These parameters are used for all projects.  The parameter name is entered witho
 * Setting all Update parms to FALSE will generate the xls but not update Project.
 * When the Project update starts, it's a good idea to bring up the Project window.  If the schedule does not appear it's a good idea to start over.  The job can be interrupted without hurting either the xls file or the schedule in the Project client.
 * The Update Actuals step is executed in three stages:
-  * Update tasks from Trello cards.  This is the longest phase.  During this phase, the focus in the Project client will jump from task to task.
-  * Loop forward through tasks in Project to check for errors and mark tasks to be deleted.  The duration of this phase is typically about 25% of the duration of the first phase. During this phase, there is no apparent activity in the MS Project client. 
-  * Loop backward through tasks in Project to delete marked tasks.  The duration of this phase is typically about 8% of the duration of the first phase.  During this phase, in the Project client the status bar at the bottom will flash as messages are displayed for each task. 
+  * **Update tasks from Trello cards.**  This is the longest phase.  During this phase, the focus in the Project client will jump from task to task.
+  * **Loop forward through tasks in Project to check for errors and mark tasks to be deleted.**  The duration of this phase is typically about 25% of the duration of the first phase. During this phase, there is no apparent activity in the MS Project client. 
+  * **Loop backward through tasks in Project to delete marked tasks.**  The duration of this phase is typically about 8% of the duration of the first phase.  During this phase, in the Project client the status bar at the bottom will flash as messages are displayed for each task. 
