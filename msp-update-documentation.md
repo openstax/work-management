@@ -2,7 +2,7 @@
 
 ## Parameters
 
-Parameters which control program execution.  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
+**Parameters which control program execution.**  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
@@ -12,7 +12,7 @@ Parameters which control program execution.  In the config file the parameter na
 | Update MSP Measures | If TRUE then run the Measures Update. | FALSE | y |
 | Debug | If TRUE then print run progress notes to the console. | FALSE | y |
 
-Parameters for Update Actual.  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
+**Parameters for Update Actual.**  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
@@ -26,7 +26,14 @@ Parameters for Update Actual.  In the config file the parameter name is prefixed
 | Update Date | Date which specifies when hrs are posted in Project.  Actual work is posted the day before this date.  Remaining work is posted on this date. | today | n |
 | Xls File Name | File name for output xls file. | blank | y |
 
-Parameters for Update Measures.  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
+Processing of Lists Included (LI) and Lists Excluded (LE)
+
+* LI nonblank LE blank: Lists on LI are included; others are excluded. 
+* LI blank LE nonblank: Lists on LE are excluded; others are included.
+* LI and LE nonblank: Lists on LI are included, then lists on LE are excluded.
+
+
+**Parameters for Update Measures.**  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
@@ -34,7 +41,7 @@ Parameters for Update Measures.  In the config file the parameter name is prefix
 | Trello Lists Not Open | Trello lists containing work items that are not open.  List names are separated by semi-colons.  Cards on these lists will not be included in the counts on the Bug & Change Open report.  All non-open lists should be included, even if they are included in the Excluded or Rejected lists.  | blank | y |
 
 
-Parameters for Update Projection.  They are prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
+**Parameters for Update Projection.**  They are prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
@@ -46,7 +53,7 @@ Parameters for Update Projection.  They are prefixed with the project name, like
 | Projected Total Work Date Window End - <measure label> | End of date window used to calculate the least-squares projection for Total Work. | Date of latest data point | y |
 | Projected Total Work Change Per Day - <measure label> | Projection line slope for Total Work.  Entering a value will override the least-squares projection. | blank | y |
 
-These parameters are used for all projects.  The parameter name is entered without the project name prefix:
+**Global parameters used for all projects.**  The parameter name is entered without the project name prefix:
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
