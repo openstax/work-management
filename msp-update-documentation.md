@@ -69,4 +69,4 @@
     * LI nonblank LE blank: Lists on LI are included; others are excluded. 
     * LI blank LE nonblank: Lists on LE are excluded; others are included.
     * LI and LE nonblank: Lists on LI are included, then lists on LE are excluded.
-* Each card must have only one 10K label.  This is because a label from a previous 10K which contains <ddd> can exclude tasks on the card from the list of tasks for this 10K.
+* It's best to remove old 10K labels from cards.  If a card has more than one 10K label, and one contains <ddd> then code and test tasks will be excluded from task lists in metrics reports.  
