@@ -209,7 +209,7 @@ namespace MspUpdate
                         // Read boards
                         if (Cnfg.PrmsOk)
                         {
-                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
                             trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
                         }
 
@@ -225,7 +225,7 @@ namespace MspUpdate
                         // Read boards
                         if (Cnfg.PrmsOk)
                         {
-                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
                             trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
                         }
                         loop = false;
@@ -240,7 +240,7 @@ namespace MspUpdate
                         // Read boards
                         if (Cnfg.PrmsOk)
                         {
-                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
                             trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
                         }
 
@@ -256,7 +256,7 @@ namespace MspUpdate
                         // Read boards
                         if (Cnfg.PrmsOk)
                         {
-                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
                             trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
                         }
 
@@ -272,7 +272,7 @@ namespace MspUpdate
                         // Read boards
                         if (Cnfg.PrmsOk)
                         {
-                            XlsFlPth = XlsOutptDrctry + Cnfg.XlsFlNm;
+                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
                             trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
                         }
 
