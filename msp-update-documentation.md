@@ -20,18 +20,11 @@
 | Include Cards Changed After | Trello scan is limited to cards changed after the specified date. | 3 days before today | n |
 | Post All Checklist Items | If TRUE then all checklist items on each card will be posted to Project Online.  If FALSE then only task checklist items (those containing "ar:") will be posted. | FALSE | n |
 | Post Checkitem Name | If TRUE then the entire Trello checkitem name will be posted as the task name in Project, truncated to 255 chars. | FALSE | n |
-| Trello Lists Included | Trello lists to be included in the scan.  List names are separated by semi-colons. | blank | y |
+| Trello Lists Included | Trello lists to be included in the scan.  See note below. | blank | y |
 | Trello Lists Excluded | Trello lists to be excluded from the scan.  List names are separated by semi-colons. | blank | y |
 | Trello Lists Rejected | Trello lists containing rejected work items.  Cards on these lists will be deleted from the schedule by Update Actuals. List names are separated by semi-colons. | blank | y |
 | Update Date | Date which specifies when hrs are posted in Project.  Actual work is posted the day before this date.  Remaining work is posted on this date. | today | n |
 | Xls File Name | File name for output xls file. | blank | y |
-
-Processing of Lists Included (LI) and Lists Excluded (LE)
-
-* LI nonblank LE blank: Lists on LI are included; others are excluded. 
-* LI blank LE nonblank: Lists on LE are excluded; others are included.
-* LI and LE nonblank: Lists on LI are included, then lists on LE are excluded.
-
 
 **Parameters for Update Measures.**  In the config file the parameter name is prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
@@ -62,10 +55,18 @@ Processing of Lists Included (LI) and Lists Excluded (LE)
 | Trello User Token | User Token required for Trello access. | None | y |
 | Xls Output Directory | Directory where output xls file will be created. | None | y |
 
-## About running the update
+## Notes
 * Setting all Update parms to FALSE will generate the xls but not update Project.
 * When the Project update starts, it's a good idea to bring up the Project window.  If the schedule does not appear it's a good idea to start over.  The job can be interrupted without hurting either the xls file or the schedule in the Project client.
 * The Update Actuals step is executed in three stages:
   * **Update tasks from Trello cards.**  This is the longest phase.  During this phase, the focus in the Project client will jump from task to task.
   * **Loop forward through tasks in Project to check for errors and mark tasks to be deleted.**  The duration of this phase is typically about 25% of the duration of the first phase. During this phase, there is no apparent activity in the MS Project client. 
   * **Loop backward through tasks in Project to delete marked tasks.**  The duration of this phase is typically about 8% of the duration of the first phase.  During this phase, in the Project client the status bar at the bottom will flash as messages are displayed for each task. 
+* Processing of Lists Included (LI) and Lists Excluded (LE)
+
+  * List names are separated by semi-colons.
+  * Conditions
+    * LI nonblank LE blank: Lists on LI are included; others are excluded. 
+    * LI blank LE nonblank: Lists on LE are excluded; others are included.
+    * LI and LE nonblank: Lists on LI are included, then lists on LE are excluded.
+* It's best to remove old 10K labels from cards.  If a card has more than one 10K label, and one contains <ddd> then code and test tasks will be excluded from task lists in metrics reports.  
