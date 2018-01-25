@@ -229,9 +229,10 @@ namespace MspUpdate
             oShtTrlloScnErrr.Columns[1].ColumnWidth = 20;
             oShtTrlloScnErrr.Columns[2].ColumnWidth = 30;
             oShtTrlloScnErrr.Columns[3].ColumnWidth = 40;
-            oShtTrlloScnErrr.Cells[1, 1] = "Trello Task #";
+            oShtTrlloScnErrr.Cells[1, 1] = "Row on Tasks Tab";
             oShtTrlloScnErrr.Cells[1, 2] = "Code Section";
             oShtTrlloScnErrr.Cells[1, 3] = "Error Description";
+            oShtTrlloScnErrr.Cells[1, 4] = "Trello Task UID";
 
             oShtAllCrds = oWB.Worksheets["All Cards"];
             oShtAllCrds.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
