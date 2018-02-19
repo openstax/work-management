@@ -176,7 +176,8 @@ namespace MspUpdate
                 Console.WriteLine("MSP Update"); Console.WriteLine("");
                 Console.WriteLine("Select Project:"); Console.WriteLine("");
                 Console.WriteLine("                [Tutor]: type Tutor");
-                Console.WriteLine("           [Book Tools]: type Book Tools");
+                Console.WriteLine("                  [CNX]: type CNX");
+                Console.WriteLine("                [Books]: type Books");
                 Console.WriteLine("[Business Intelligence]: type BIT");
                 Console.WriteLine("             [Research]: type Research");
                 Console.WriteLine("             [UTS Test]: type UTS Test");
@@ -231,12 +232,28 @@ namespace MspUpdate
                         loop = false;
                         break;
 
-                    case "BOOK TOOLS":
-                        Console.WriteLine("> Book Tools selected. Stand by....");
+                    case "CNX":
+                        Console.WriteLine("> CNX selected. Stand by....");
 
                         // Get configuration
                         Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
                         
+                        // Read boards
+                        if (Cnfg.PrmsOk)
+                        {
+                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
+                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                        }
+
+                        loop = false;
+                        break;
+
+                    case "BOOKS":
+                        Console.WriteLine("> Books selected. Stand by....");
+
+                        // Get configuration
+                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
+
                         // Read boards
                         if (Cnfg.PrmsOk)
                         {
@@ -365,11 +382,17 @@ namespace MspUpdate
             System.IO.StreamReader file = new System.IO.StreamReader(CnfgFlPth);
             while ((ln = file.ReadLine()) != null)
             {
-                    if (ln.IndexOf("=") != -1)
+                // Fill Prms dictionary with input parms.  
+                // Exclude Measure Condition since not needed here and there may be several of these.
+                // Will get them during Update Measures and Update Projection.
+                if (ln.IndexOf("=") != -1)
                     {
                         Tkns = Regex.Split(ln, "=");
-                        Prms.Add(Tkns[0], Tkns[1]);
-                        cntr++;
+                        if (Tkns[0].IndexOf("Measure Condition") == -1)
+                        {
+                            Prms.Add(Tkns[0], Tkns[1]);
+                            cntr++;
+                        }
                     }
             }
             file.Close();

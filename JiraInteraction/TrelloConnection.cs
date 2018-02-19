@@ -482,7 +482,7 @@ namespace MspUpdate
                             }
                             else
                             {
-                                Lbls += "," + label.Name;
+                                Lbls += ";" + label.Name;
                             }
                         }
                     }
