@@ -30,7 +30,7 @@
 
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
-| Measure Labels | Labels for which measures will be calculated. A set of measures is calculated and posted for each measure label plus all tasks. | blank | n |
+| Measure Condition | Condition for which measures will be calculated. Each condition is in this format: (LabelIncluded;LabelIncluded) AND NOT (LabelExcluded;LabelExcluded).  A set of measures is calculated and posted for each measure condition plus for all tasks. For a card/task to be included in a measure, it must have all the specified LabelIncluded and none of the specified LabelExcluded.  LabelIncluded and LabelExcluded entries are case-sensitive. | blank | n |
 | Trello Lists Not Open | Trello lists containing work items that are not open.  List names are separated by semi-colons.  Cards on these lists will not be included in the counts on the Bug & Change Open report.  All non-open lists should be included, even if they are included in the Excluded or Rejected lists.  | blank | y |
 
 
