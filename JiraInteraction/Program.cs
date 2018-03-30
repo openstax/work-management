@@ -16,6 +16,7 @@ namespace MspUpdate
         public bool PrmsOk;
         public bool PstAllChckLstItms;
         public bool PstChckItmNm;
+        public string PtsHrs;
         public string TrlloAppKy;
         public List<string> TrlloLstsIncldd = new List<string>();
         public List<string> TrlloLstsInclddInpt = new List<string>();
@@ -29,8 +30,14 @@ namespace MspUpdate
         public bool UpdtMspActls;
         public bool UpdtMspMsrs;
         public bool UpdtMspPrjctd;
+        public bool UpdtMspKds;
         public string XlsFlNm;
         public string XlsOutptDrctry;
+        public List<string> KdBrds = new List<string>();
+        public List<string> KdLstsIncldd = new List<string>();
+        public List<string> KdLstsInclddInpt = new List<string>();
+        public List<string> KdLstsExcldd = new List<string>();
+        public List<string> KdLstsExclddInpt = new List<string>();
     }
 
     public class ParmsFound
@@ -41,6 +48,7 @@ namespace MspUpdate
         public bool MspPrjctNm;
         public bool PstAllChckLstItms;
         public bool PstChckItmNm;
+        public bool PtsHrs;
         public bool TrlloAppKy;
         public bool TrlloLstsInclddInpt;
         public bool TrlloLstsExclddInpt;
@@ -51,8 +59,13 @@ namespace MspUpdate
         public bool UpdtMspActls;
         public bool UpdtMspMsrs;
         public bool UpdtMspPrjctd;
+        public bool UpdtMspKds;
         public bool XlsFlNm;
         public bool XlsOutptDrctry;
+        public bool KdBrds;
+        public bool KdLstsInclddInpt;
+        public bool KdLstsExclddInpt;
+        public bool KdLstsNtOpn;
     }
 
     class Program
@@ -74,18 +87,6 @@ namespace MspUpdate
                 MyList = new List<string>();
             }
         }
-        struct Configuration2
-        {
-            public List<string> Brds;
-            public List<string> TrlloLstsIncldd;
-            public bool UpdtMspActls;
-            public bool UpdtMspPrjctd;
-            public DateTime UpdtDt;
-            public string MspPrjctNm;
-            public bool PstAllChckLstItms;
-            public DateTime IncldCrdsChngdAftr;
-            public string XlsFlNm;
-        }
 
         /*
          * public void SetDebugExec()
@@ -104,10 +105,8 @@ namespace MspUpdate
             bool DbgExec = false;
             DateTime DtNll = new DateTime(1800, 1, 1);
             DateTime DtToUpdt = DateTime.Today;
-            // string strDtToUpdt;
             DateTime IncldCrdsChngdAftr = DtNll;
             string MspExe = "";
-            //string MspPrjctNm;
             string Prjct = "";
             string PrjctMsp = "";
             var Prms = new Dictionary<string, string>();
@@ -203,110 +202,58 @@ namespace MspUpdate
                 {
                     case "UTS TEST":
                         Console.WriteLine("> UTS Test selected. Stand by...");
-
-                        // Get configuration
-                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-
-                        // Read boards
-                        if (Cnfg.PrmsOk)
-                        {
-                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
-                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-                        }
-
                         loop = false;
                         break;
 
                     case "TUTOR":
                         Console.WriteLine("> Tutor selected. Stand by...");
-
-                        // Get configuration
-                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-
-                        // Read boards
-                        if (Cnfg.PrmsOk)
-                        {
-                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
-                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-                        }
                         loop = false;
                         break;
 
                     case "CNX":
                         Console.WriteLine("> CNX selected. Stand by....");
-
-                        // Get configuration
-                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        
-                        // Read boards
-                        if (Cnfg.PrmsOk)
-                        {
-                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
-                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-                        }
-
                         loop = false;
                         break;
 
                     case "BOOKS":
                         Console.WriteLine("> Books selected. Stand by....");
-
-                        // Get configuration
-                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-
-                        // Read boards
-                        if (Cnfg.PrmsOk)
-                        {
-                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
-                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-                        }
-
                         loop = false;
                         break;
 
                     case "RESEARCH":
                         Console.WriteLine("> Research selected. Stand by...");
-
-                        // Get configuration
-                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        
-                        // Read boards
-                        if (Cnfg.PrmsOk)
-                        {
-                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
-                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-                        }
-
                         loop = false;
                         break;
 
                     case "BIT":
                         Console.WriteLine("> BIT selected. Stand by...");
-
-                        // Get configuration
-                        Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
-                        
-                        // Read boards
-                        if (Cnfg.PrmsOk)
-                        {
-                            XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
-                            trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
-                        }
-
                         loop = false;
                         break;
                     case "EXIT":
                         Console.WriteLine("Exiting. Stand by...(hit return)");
                         loop = false;
                         break;
-
                     default:
                         Console.WriteLine(reply + " is not an option. NOTE: these options are case-sensitive, dude. Try again.");
-
+                        loop = false;
                         break;
                 }
 
+                // Get configuration
+                Cnfg = Program.Read_Config(Prjct, CnfgFlPth);
 
+                // Read boards
+                if (Cnfg.PrmsOk)
+                {
+                    Console.WriteLine("Points/Hours = " + Cnfg.PtsHrs);
+                    Console.WriteLine("Update MSP Actuals = " + Cnfg.UpdtMspActls);
+                    Console.WriteLine("Update MSP Measures = " + Cnfg.UpdtMspMsrs);
+                    Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
+                    Console.WriteLine("Update MSP KDs = " + Cnfg.UpdtMspKds);
+
+                    XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
+                    trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                }
             }
 
             // Pause if console input 
@@ -343,6 +290,7 @@ namespace MspUpdate
             Cnfg.MspPrjctNm = "";
             Cnfg.PstAllChckLstItms = false;
             Cnfg.PstChckItmNm = false;
+            Cnfg.PtsHrs = "";
             Cnfg.TrlloAppKy = "";
             Cnfg.TrlloLstsExcldd.Clear();
             Cnfg.TrlloLstsExclddInpt.Clear();
@@ -355,8 +303,14 @@ namespace MspUpdate
             Cnfg.UpdtMspActls = false;
             Cnfg.UpdtMspMsrs = false;
             Cnfg.UpdtMspPrjctd = false;
+            Cnfg.UpdtMspKds = false;
             Cnfg.XlsFlNm = "";
             Cnfg.XlsOutptDrctry = "";
+            Cnfg.KdBrds.Clear();
+            Cnfg.KdLstsExcldd.Clear();
+            Cnfg.KdLstsExclddInpt.Clear();
+            Cnfg.KdLstsIncldd.Clear();
+            Cnfg.KdLstsInclddInpt.Clear();
 
             PrmsFnd.Brds = true;
             PrmsFnd.IncldCrdsChngdAftr = true;
@@ -364,6 +318,7 @@ namespace MspUpdate
             PrmsFnd.MspPrjctNm = true;
             PrmsFnd.PstAllChckLstItms = true;
             PrmsFnd.PstChckItmNm = true;
+            PrmsFnd.PtsHrs = true;
             PrmsFnd.TrlloAppKy = true;
             PrmsFnd.TrlloLstsExclddInpt = true;
             PrmsFnd.TrlloLstsInclddInpt = true;
@@ -374,8 +329,12 @@ namespace MspUpdate
             PrmsFnd.UpdtMspActls = true;
             PrmsFnd.UpdtMspMsrs = true;
             PrmsFnd.UpdtMspPrjctd = true;
+            PrmsFnd.UpdtMspKds = true;
             PrmsFnd.XlsFlNm = true;
             PrmsFnd.XlsOutptDrctry = true;
+            PrmsFnd.KdBrds = true;
+            PrmsFnd.KdLstsExclddInpt = true;
+            PrmsFnd.KdLstsInclddInpt = true;
 
             // Read config file
             // string UsrNm = Environment.UserName;
@@ -610,6 +569,32 @@ namespace MspUpdate
 
             try
             {
+                Str1 = Prms[Prjct + ":Update MSP KDs"];
+                Cnfg.UpdtMspKds = Convert.ToBoolean(Str1);
+            }
+            catch
+            {
+                PrmsFnd.UpdtMspKds = false;
+            }
+
+            try
+            {
+                if (Prms[Prjct + ":Points/Hours"].ToUpper() == "POINTS" || Prms[Prjct + ":Points/Hours"].ToUpper() == "HOURS")
+                {
+                    Cnfg.PtsHrs = Prms[Prjct + ":Points/Hours"];
+                }
+                else
+                {
+                    PrmsFnd.PtsHrs = false;
+                }
+            }
+            catch
+            {
+                PrmsFnd.PtsHrs = false;
+            }
+
+            try
+            {
                 Cnfg.XlsOutptDrctry = Prms["Xls Output Directory"];
             }
             catch
@@ -626,14 +611,65 @@ namespace MspUpdate
                 PrmsFnd.XlsFlNm = false;
             }
 
-            Console.WriteLine("Update MSP Actuals = " + Cnfg.UpdtMspActls);
-            Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
-            Console.WriteLine("Update MSP Measures = " + Cnfg.UpdtMspMsrs);
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":KD Boards"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.KdBrds.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.KdBrds = false;
+            }
+
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":KD Lists Included"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.KdLstsInclddInpt.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.KdLstsInclddInpt = false;
+            }
+
+            try
+            {
+                Lst.Clear();
+                Str1 = Prms[Prjct + ":KD Lists Excluded"];
+                Tkns = Regex.Split(Str1, ";");
+                foreach (string Tkn in Tkns)
+                {
+                    if (Tkn != "")
+                    {
+                        Cnfg.KdLstsExclddInpt.Add(Tkn);
+                    }
+                }
+            }
+            catch
+            {
+                PrmsFnd.KdLstsExclddInpt = false;
+            }
 
             Cnfg.PrmsOk = true;
             if (!(PrmsFnd.Brds && PrmsFnd.MspExe && PrmsFnd.MspPrjctNm && PrmsFnd.TrlloAppKy
                 && PrmsFnd.TrlloLstsExclddInpt && PrmsFnd.TrlloLstsInclddInpt && PrmsFnd.TrlloLstsNtOpn
-                && PrmsFnd.TrlloLstsRjctd && PrmsFnd.TrlloUsrTkn && PrmsFnd.XlsFlNm && PrmsFnd.XlsOutptDrctry))
+                && PrmsFnd.TrlloLstsRjctd && PrmsFnd.TrlloUsrTkn && PrmsFnd.XlsFlNm && PrmsFnd.XlsOutptDrctry 
+                && PrmsFnd.PtsHrs && PrmsFnd.KdBrds && PrmsFnd.KdLstsExclddInpt && PrmsFnd.KdLstsInclddInpt))
             {
                 Cnfg.PrmsOk = false;
                 Console.WriteLine("\n\r");
@@ -690,6 +726,26 @@ namespace MspUpdate
                 if (!PrmsFnd.XlsOutptDrctry)
                 {
                     Console.WriteLine("ERROR missing parm: Xls Output Directory");
+                }
+
+                if (!PrmsFnd.PtsHrs)
+                {
+                    Console.WriteLine("ERROR missing parm: Points/Hours");
+                }
+
+                if (!PrmsFnd.KdBrds)
+                {
+                    Console.WriteLine("ERROR missing parm: KD Boards");
+                }
+
+                if (!PrmsFnd.KdLstsInclddInpt)
+                {
+                    Console.WriteLine("ERROR missing parm: KD Lists Included");
+                }
+
+                if (!PrmsFnd.KdLstsExclddInpt)
+                {
+                    Console.WriteLine("ERROR missing parm: KD Lists Excluded");
                 }
             }
 
