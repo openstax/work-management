@@ -179,6 +179,8 @@ namespace MspUpdate
                 Console.WriteLine("                [Books]: type Books");
                 Console.WriteLine("[Business Intelligence]: type BIT");
                 Console.WriteLine("             [Research]: type Research");
+                Console.WriteLine("              [Unicorn]: type Unicorn");
+                Console.WriteLine("                   [UX]: type UX");
                 Console.WriteLine("             [UTS Test]: type UTS Test");
                 Console.WriteLine("");
                 Console.WriteLine("To quit, type EXIT"); Console.WriteLine("");
@@ -229,12 +231,20 @@ namespace MspUpdate
                         Console.WriteLine("> BIT selected. Stand by...");
                         loop = false;
                         break;
+                    case "UNICORN":
+                        Console.WriteLine("> Unicorn selected. Stand by...");
+                        loop = false;
+                        break;
+                    case "UX":
+                        Console.WriteLine("> UX selected. Stand by...");
+                        loop = false;
+                        break;
                     case "EXIT":
                         Console.WriteLine("Exiting. Stand by...(hit return)");
                         loop = false;
                         break;
                     default:
-                        Console.WriteLine(reply + " is not an option. NOTE: these options are case-sensitive, dude. Try again.");
+                        Console.WriteLine(reply + " is not an option. Please try again.");
                         loop = false;
                         break;
                 }
