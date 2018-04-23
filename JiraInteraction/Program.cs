@@ -297,7 +297,7 @@ namespace MspUpdate
             Cnfg.TrlloLstsIncldd.Clear();
             Cnfg.TrlloLstsInclddInpt.Clear();
             Cnfg.TrlloLstsNtOpn.Clear();
-            Cnfg.TrlloLstsRjctd.Clear();
+            //Cnfg.TrlloLstsRjctd.Clear();
             Cnfg.TrlloUsrTkn = "";
             Cnfg.UpdtDt = DateTime.Today;
             Cnfg.UpdtMspActls = false;
@@ -323,7 +323,7 @@ namespace MspUpdate
             PrmsFnd.TrlloLstsExclddInpt = true;
             PrmsFnd.TrlloLstsInclddInpt = true;
             PrmsFnd.TrlloLstsNtOpn = true;
-            PrmsFnd.TrlloLstsRjctd = true;
+            //PrmsFnd.TrlloLstsRjctd = true;
             PrmsFnd.TrlloUsrTkn = true;
             PrmsFnd.UpdtDt = true;
             PrmsFnd.UpdtMspActls = true;
@@ -500,23 +500,23 @@ namespace MspUpdate
                 PrmsFnd.TrlloLstsNtOpn = false;
             }
 
-            try
-            {
-                Lst.Clear();
-                Str1 = Prms[Prjct + ":Trello Lists Rejected"];
-                Tkns = Regex.Split(Str1, ";");
-                foreach (string Tkn in Tkns)
-                {
-                    if (Tkn != "")
-                    {
-                        Cnfg.TrlloLstsRjctd.Add(Tkn);
-                    }
-                }
-            }
-            catch
-            {
-                PrmsFnd.TrlloLstsRjctd = false;
-            }
+            //try
+            //{
+            //    Lst.Clear();
+            //    Str1 = Prms[Prjct + ":Trello Lists Rejected"];
+            //    Tkns = Regex.Split(Str1, ";");
+            //    foreach (string Tkn in Tkns)
+            //    {
+            //        if (Tkn != "")
+            //        {
+            //            Cnfg.TrlloLstsRjctd.Add(Tkn);
+            //        }
+            //    }
+            //}
+            //catch
+            //{
+            //    PrmsFnd.TrlloLstsRjctd = false;
+            //}
 
             try
             {
@@ -668,7 +668,7 @@ namespace MspUpdate
             Cnfg.PrmsOk = true;
             if (!(PrmsFnd.Brds && PrmsFnd.MspExe && PrmsFnd.MspPrjctNm && PrmsFnd.TrlloAppKy
                 && PrmsFnd.TrlloLstsExclddInpt && PrmsFnd.TrlloLstsInclddInpt && PrmsFnd.TrlloLstsNtOpn
-                && PrmsFnd.TrlloLstsRjctd && PrmsFnd.TrlloUsrTkn && PrmsFnd.XlsFlNm && PrmsFnd.XlsOutptDrctry 
+                && PrmsFnd.TrlloUsrTkn && PrmsFnd.XlsFlNm && PrmsFnd.XlsOutptDrctry 
                 && PrmsFnd.PtsHrs && PrmsFnd.KdBrds && PrmsFnd.KdLstsExclddInpt && PrmsFnd.KdLstsInclddInpt))
             {
                 Cnfg.PrmsOk = false;
@@ -708,10 +708,10 @@ namespace MspUpdate
                     Console.WriteLine("ERROR missing parm: Trello Lists Not Open");
                 }
 
-                if (!PrmsFnd.TrlloLstsRjctd)
-                {
-                    Console.WriteLine("ERROR missing parm: Trello Lists Rejected");
-                }
+                //if (!PrmsFnd.TrlloLstsRjctd)
+                //{
+                //    Console.WriteLine("ERROR missing parm: Trello Lists Rejected");
+                //}
 
                 if (!PrmsFnd.TrlloUsrTkn)
                 {
