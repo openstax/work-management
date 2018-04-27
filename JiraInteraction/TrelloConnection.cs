@@ -205,20 +205,22 @@ namespace MspUpdate
                     oShtCrdsFrmTrllo.Columns[2].ColumnWidth = 20;
                     oShtCrdsFrmTrllo.Columns[3].ColumnWidth = 20;
                     oShtCrdsFrmTrllo.Columns[4].ColumnWidth = 10;
-                    oShtCrdsFrmTrllo.Columns[5].ColumnWidth = 15;
-                    oShtCrdsFrmTrllo.Columns[6].ColumnWidth = 8;
-                    oShtCrdsFrmTrllo.Columns[7].ColumnWidth = 5;
+                    oShtCrdsFrmTrllo.Columns[5].ColumnWidth = 10;
+                    oShtCrdsFrmTrllo.Columns[6].ColumnWidth = 15;
+                    oShtCrdsFrmTrllo.Columns[7].ColumnWidth = 8;
                     oShtCrdsFrmTrllo.Columns[8].ColumnWidth = 5;
-                    oShtCrdsFrmTrllo.Columns[9].ColumnWidth = 15;
+                    oShtCrdsFrmTrllo.Columns[9].ColumnWidth = 5;
+                    oShtCrdsFrmTrllo.Columns[10].ColumnWidth = 15;
                     oShtCrdsFrmTrllo.Cells[1, 1] = "Board";
                     oShtCrdsFrmTrllo.Cells[1, 2] = "List";
                     oShtCrdsFrmTrllo.Cells[1, 3] = "Card Name";
-                    oShtCrdsFrmTrllo.Cells[1, 4] = "Priority";
-                    oShtCrdsFrmTrllo.Cells[1, 5] = "Labels";
-                    oShtCrdsFrmTrllo.Cells[1, 6] = "Points";
-                    oShtCrdsFrmTrllo.Cells[1, 7] = "Card ID";
-                    oShtCrdsFrmTrllo.Cells[1, 8] = "Card URL";
-                    oShtCrdsFrmTrllo.Cells[1, 9] = "KD Label";
+                    oShtCrdsFrmTrllo.Cells[1, 4] = "Card Type";
+                    oShtCrdsFrmTrllo.Cells[1, 5] = "Priority";
+                    oShtCrdsFrmTrllo.Cells[1, 6] = "Labels";
+                    oShtCrdsFrmTrllo.Cells[1, 7] = "Points";
+                    oShtCrdsFrmTrllo.Cells[1, 8] = "Card ID";
+                    oShtCrdsFrmTrllo.Cells[1, 9] = "Card URL";
+                    oShtCrdsFrmTrllo.Cells[1, 10] = "KD Label";
 
                     oShtKdsFrmTrllo = oWB.Worksheets.Add(oWB.Worksheets[1], Type.Missing, Type.Missing, Type.Missing);
                     oShtKdsFrmTrllo.Name = "KDs From Trello";
@@ -509,6 +511,7 @@ namespace MspUpdate
             string CrdNm = "";
             string CrdPrty = "";
             List<string> Crds = new List<string>();
+            string CrdTyp = "";
             string CrdUrl = "";
             bool DbgIncldThsCrd;
             DataTable FldsKd = new DataTable();
@@ -816,9 +819,29 @@ namespace MspUpdate
 
                     if (DbgIncldThsCrd && TrlloLstFnd && InInclddDts && NtTmpltCrd && NtMrkrCrd)
                     {
+                        // Get card type 
+                        CrdTyp = "unknown";
+                        foreach (var Lbl in card.Labels)
+                        {
+                            switch (Lbl.Name)
+                            {
+                                case "story":
+                                    CrdTyp = "story";
+                                    break;
+
+                                case "change":
+                                    CrdTyp = "change";
+                                    break;
+
+                                case "bug":
+                                    CrdTyp = "bug";
+                                    break;
+                            }
+                        }
+
                         // Get points 
                         Pts = -99;
-                       foreach (var Lbl in card.Labels)
+                        foreach (var Lbl in card.Labels)
                         {
                             switch (Lbl.Name)
                             {
@@ -858,7 +881,19 @@ namespace MspUpdate
                                     Pts = 80;
                                     break;
                             }
+                        }
 
+                        // if Pts not found then default
+                        if (Pts == -99)
+                        {
+                            if (CrdTyp == "Story")
+                            {
+                                Pts = 6;
+                            }
+                            else
+                            {
+                                Pts = 4;
+                            }
                         }
 
                         // Get KD label
@@ -881,16 +916,17 @@ namespace MspUpdate
                         oShtCrdsFrmTrllo.Cells[iRwAllCrds, 1] = Brd.Name;
                         oShtCrdsFrmTrllo.Cells[iRwAllCrds, 2] = card.List.Name;
                         oShtCrdsFrmTrllo.Cells[iRwAllCrds, 3] = card.Name;
-                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 4] = CrdPrty;
-                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 5] = Lbls;
+                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 4] = CrdTyp;
+                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 5] = CrdPrty;
+                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 6] = Lbls;
                         if (Pts != -99)
                         {
-                            oShtCrdsFrmTrllo.Cells[iRwAllCrds, 6] = Pts;
+                            oShtCrdsFrmTrllo.Cells[iRwAllCrds, 7] = Pts;
 
                         }
-                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 7] = card.Id;
-                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 8] = CrdUrl;
-                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 9] = KdLbl;
+                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 8] = card.Id;
+                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 9] = CrdUrl;
+                        oShtCrdsFrmTrllo.Cells[iRwAllCrds, 10] = KdLbl;
                     }
 
                 } // End foreach card
