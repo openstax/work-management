@@ -886,7 +886,7 @@ namespace MspUpdate
                         // if Pts not found then default
                         if (Pts == -99)
                         {
-                            if (CrdTyp == "Story")
+                            if (CrdTyp == "story")
                             {
                                 Pts = 6;
                             }
