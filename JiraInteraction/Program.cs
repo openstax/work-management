@@ -179,6 +179,7 @@ namespace MspUpdate
                 Console.WriteLine("                [Books]: type Books");
                 Console.WriteLine("[Business Intelligence]: type BIT");
                 Console.WriteLine("             [Research]: type Research");
+                Console.WriteLine("           [SalesForce]: type SF");
                 Console.WriteLine("              [Unicorn]: type Unicorn");
                 Console.WriteLine("                   [UX]: type UX");
                 Console.WriteLine("             [UTS Test]: type UTS Test");
@@ -224,6 +225,11 @@ namespace MspUpdate
 
                     case "RESEARCH":
                         Console.WriteLine("> Research selected. Stand by...");
+                        loop = false;
+                        break;
+
+                    case "SF":
+                        Console.WriteLine("> SalesForce selected. Stand by...");
                         loop = false;
                         break;
 
