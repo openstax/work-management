@@ -14,8 +14,8 @@ namespace MspUpdate
         public string MspExe;
         public string MspPrjctNm;
         public bool PrmsOk;
-        public bool PstAllChckLstItms;
-        public bool PstChckItmNm;
+        //public bool PstAllChckLstItms;
+        //public bool PstChckItmNm;
         public string PtsHrs;
         public string TrlloAppKy;
         public List<string> TrlloLstsIncldd = new List<string>();
@@ -46,9 +46,9 @@ namespace MspUpdate
         public bool IncldCrdsChngdAftr;
         public bool MspExe;
         public bool MspPrjctNm;
-        public bool PstAllChckLstItms;
-        public bool PstChckItmNm;
-        public bool PtsHrs;
+        //public bool PstAllChckLstItms;
+        //public bool PstChckItmNm;
+        //public bool PtsHrs;
         public bool TrlloAppKy;
         public bool TrlloLstsInclddInpt;
         public bool TrlloLstsExclddInpt;
@@ -301,12 +301,12 @@ namespace MspUpdate
             // Initial values
             Cnfg.Brds.Clear();
             Cnfg.DbgUsr = false;
-            Cnfg.IncldCrdsChngdAftr = DateTime.Today.AddDays(-3);  
+            Cnfg.IncldCrdsChngdAftr = new DateTime(1900, 1, 1);  
             Cnfg.MspExe = "";
             Cnfg.MspPrjctNm = "";
-            Cnfg.PstAllChckLstItms = false;
-            Cnfg.PstChckItmNm = false;
-            Cnfg.PtsHrs = "";
+            //Cnfg.PstAllChckLstItms = false;
+            //Cnfg.PstChckItmNm = false;
+            Cnfg.PtsHrs = "points";
             Cnfg.TrlloAppKy = "";
             Cnfg.TrlloLstsExcldd.Clear();
             Cnfg.TrlloLstsExclddInpt.Clear();
@@ -332,9 +332,9 @@ namespace MspUpdate
             PrmsFnd.IncldCrdsChngdAftr = true;
             PrmsFnd.MspExe = true;
             PrmsFnd.MspPrjctNm = true;
-            PrmsFnd.PstAllChckLstItms = true;
-            PrmsFnd.PstChckItmNm = true;
-            PrmsFnd.PtsHrs = true;
+            //PrmsFnd.PstAllChckLstItms = true;
+            //PrmsFnd.PstChckItmNm = true;
+            //PrmsFnd.PtsHrs = true;
             PrmsFnd.TrlloAppKy = true;
             PrmsFnd.TrlloLstsExclddInpt = true;
             PrmsFnd.TrlloLstsInclddInpt = true;
@@ -433,25 +433,25 @@ namespace MspUpdate
                 PrmsFnd.MspPrjctNm = false;
             }
 
-            try
-            {
-                Str1 = Prms[Prjct + ":Post Checkitem Name"];
-                Cnfg.PstChckItmNm = Convert.ToBoolean(Str1);
-            }
-            catch
-            {
-                PrmsFnd.PstChckItmNm = false;
-            }
+            //try
+            //{
+            //    Str1 = Prms[Prjct + ":Post Checkitem Name"];
+            //    Cnfg.PstChckItmNm = Convert.ToBoolean(Str1);
+            //}
+            //catch
+            //{
+            //    PrmsFnd.PstChckItmNm = false;
+            //}
 
-            try
-            {
-                Str1 = Prms[Prjct + ":Post All Checklist Items"];
-                Cnfg.PstAllChckLstItms = Convert.ToBoolean(Str1);
-            }
-            catch
-            {
-                PrmsFnd.PstAllChckLstItms = false;
-            }
+            //try
+            //{
+            //    Str1 = Prms[Prjct + ":Post All Checklist Items"];
+            //    Cnfg.PstAllChckLstItms = Convert.ToBoolean(Str1);
+            //}
+            //catch
+            //{
+            //    PrmsFnd.PstAllChckLstItms = false;
+            //}
 
             try
             {
@@ -593,21 +593,21 @@ namespace MspUpdate
                 PrmsFnd.UpdtMspKds = false;
             }
 
-            try
-            {
-                if (Prms[Prjct + ":Points/Hours"].ToUpper() == "POINTS" || Prms[Prjct + ":Points/Hours"].ToUpper() == "HOURS")
-                {
-                    Cnfg.PtsHrs = Prms[Prjct + ":Points/Hours"];
-                }
-                else
-                {
-                    PrmsFnd.PtsHrs = false;
-                }
-            }
-            catch
-            {
-                PrmsFnd.PtsHrs = false;
-            }
+            //try
+            //{
+            //    if (Prms[Prjct + ":Points/Hours"].ToUpper() == "POINTS" || Prms[Prjct + ":Points/Hours"].ToUpper() == "HOURS")
+            //    {
+            //        Cnfg.PtsHrs = Prms[Prjct + ":Points/Hours"];
+            //    }
+            //    else
+            //    {
+            //        Cnfg.PtsHrs = "points";
+            //    }
+            //}
+            //catch
+            //{
+            //    PrmsFnd.PtsHrs = false;
+            //}
 
             try
             {
@@ -685,7 +685,7 @@ namespace MspUpdate
             if (!(PrmsFnd.Brds && PrmsFnd.MspExe && PrmsFnd.MspPrjctNm && PrmsFnd.TrlloAppKy
                 && PrmsFnd.TrlloLstsExclddInpt && PrmsFnd.TrlloLstsInclddInpt && PrmsFnd.TrlloLstsNtOpn
                 && PrmsFnd.TrlloUsrTkn && PrmsFnd.XlsFlNm && PrmsFnd.XlsOutptDrctry 
-                && PrmsFnd.PtsHrs && PrmsFnd.KdBrds && PrmsFnd.KdLstsExclddInpt && PrmsFnd.KdLstsInclddInpt))
+                && PrmsFnd.KdBrds && PrmsFnd.KdLstsExclddInpt && PrmsFnd.KdLstsInclddInpt))
             {
                 Cnfg.PrmsOk = false;
                 Console.WriteLine("\n\r");
@@ -744,10 +744,10 @@ namespace MspUpdate
                     Console.WriteLine("ERROR missing parm: Xls Output Directory");
                 }
 
-                if (!PrmsFnd.PtsHrs)
-                {
-                    Console.WriteLine("ERROR missing parm: Points/Hours");
-                }
+                //if (!PrmsFnd.PtsHrs)
+                //{
+                //    Console.WriteLine("ERROR missing parm: Points/Hours");
+                //}
 
                 if (!PrmsFnd.KdBrds)
                 {
