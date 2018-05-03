@@ -267,7 +267,7 @@ namespace MspUpdate
                     Console.WriteLine("Update MSP Projected = " + Cnfg.UpdtMspPrjctd);
                     Console.WriteLine("Update MSP KDs = " + Cnfg.UpdtMspKds);
 
-                    XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm;
+                    XlsFlPth = Cnfg.XlsOutptDrctry + Cnfg.XlsFlNm.Substring(0, Cnfg.XlsFlNm.LastIndexOf(".")) + ".xlsm";
                     trelloConnect.CteReadBoard(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
                 }
             }

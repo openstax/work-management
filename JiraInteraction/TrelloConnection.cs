@@ -46,6 +46,7 @@ namespace MspUpdate
         ManateeSerializer serializer;
         string Tm;
         bool UpdtMspActls;
+        bool UpdtMspKds;
         bool UpdtMspMsrs;
         bool UpdtMspPrjctd;
 
@@ -64,6 +65,13 @@ namespace MspUpdate
             {
                 Console.Write("\r\nEntering CTEReadBoard");
             }
+
+            // Config parms
+            UpdtMspActls = Cnfg.UpdtMspActls;
+            UpdtMspKds = Cnfg.UpdtMspKds;
+            UpdtMspMsrs = Cnfg.UpdtMspMsrs;
+            UpdtMspPrjctd = Cnfg.UpdtMspPrjctd;
+
 
             // Manatee configuration
             var serializer = new ManateeSerializer();
@@ -248,7 +256,10 @@ namespace MspUpdate
                     TrelloParsePoints(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
 
                     // Parse KD cards for KD info
-                    TrelloParseKds(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                    if (UpdtMspKds)
+                    {
+                        TrelloParseKds(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                    }
 
                     // Save workbook
                     oWB.Save();
@@ -256,7 +267,7 @@ namespace MspUpdate
                     // Update Project Online
                     // DateTime DtUpdt = new DateTime(2017, 1, 3);
                     // string PrjctMsp = "BruceP Test 2";
-                    if (UpdtMspActls || UpdtMspPrjctd || UpdtMspMsrs)
+                    if (UpdtMspActls || UpdtMspPrjctd || UpdtMspMsrs || UpdtMspKds)
                     {
                         oXL.Run("Update_Project_Online_Points", MspExe);
                     }
