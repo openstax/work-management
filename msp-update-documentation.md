@@ -28,9 +28,7 @@
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
 | Boards | Trello boards to be scanned. | blank | y |
-| Include Cards Changed After | Trello scan is limited to cards changed after the specified date. | 3 days before today | n |
-| Post All Checklist Items | If TRUE then all checklist items on each card will be posted to Project Online.  If FALSE then only task checklist items (those containing "ar:") will be posted. | FALSE | n |
-| Post Checkitem Name | If TRUE then the entire Trello checkitem name will be posted as the task name in Project, truncated to 255 chars. | FALSE | n |
+| Include Cards Changed After | Trello scan is limited to cards changed after the specified date. | 1/1/1900 | n |
 | Trello Lists Included | Trello lists to be included in the scan.  See note below. | blank | y |
 | Trello Lists Excluded | Trello lists to be excluded from the scan.  List names are separated by semi-colons. | blank | y |
 | Xls File Name | File name for output xls file. | blank | y |
@@ -40,7 +38,7 @@
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
 | Measure Condition | Condition for which measures will be calculated. Each condition is in this format: (LabelIncluded;LabelIncluded) AND NOT (LabelExcluded;LabelExcluded).  A set of measures is calculated and posted for each measure condition plus for all tasks. For a card/task to be included in a measure, it must have all the specified LabelIncluded and none of the specified LabelExcluded.  LabelIncluded and LabelExcluded entries are case-sensitive. | blank | n |
-| Trello Lists Not Open | Trello lists containing work items that are not open.  List names are separated by semi-colons.  Cards on these lists will not be included in the counts on the Bug & Change Open report.  All non-open lists should be included, even if they are included in the Excluded or Rejected lists.  | blank | y |
+| Trello Lists Not Open | Trello lists containing work items that are not open.  List names are separated by semi-colons.  Cards on these lists will not be included in the counts on the Bug & Change Open report.  Lists with names starting with "Release" or "Hotfix" are automatically included.  | blank | y |
 
 **Parameters for Update Projection.**  They are prefixed with the project name, like this: BIT:Boards.  There should be a set of them for each project.
 
@@ -79,3 +77,9 @@
     * LI blank LE nonblank: Lists on LE are excluded; others are included.
     * LI and LE nonblank: Lists on LI are included, then lists on LE are excluded.
 
+**Obsolete Parameters**
+| Parameter | Description | Default | Required |
+| ---------- | --------------------------- | :--------: | :--------: |
+| Points/Hours | If Points then run points-based update. If Hours then run hours-based update (obsolete). | none | y |
+| Post All Checklist Items | If TRUE then all checklist items on each card will be posted to Project Online.  If FALSE then only task checklist items (those containing "ar:") will be posted. | FALSE | n |
+| Post Checkitem Name | If TRUE then the entire Trello checkitem name will be posted as the task name in Project, truncated to 255 chars. | FALSE | n |
