@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using System.Text.RegularExpressions;
 using Manatee.Trello;
 using Manatee.Trello.ManateeJson;
-using Manatee.Trello.WebApi;
+//using Manatee.Trello.CustomFields;
+//using Manatee.Trello.WebApi;
 using Excel = Microsoft.Office.Interop.Excel;
 
 
@@ -17,7 +19,7 @@ namespace MspUpdate
     {
         Dictionary<string, List<string>> cardSorted = new Dictionary<string, List<string>>();
         Boolean Dbg;
-        ManateeFactory JsonFactory;
+        //ManateeFactory JsonFactory;
         string MspExe;
         List<string> noLabelTickets = new List<string>();
         Microsoft.Office.Interop.Excel._Worksheet oShtExec;
@@ -42,8 +44,8 @@ namespace MspUpdate
 
         Microsoft.Office.Interop.Excel.Application oXL;
         Microsoft.Office.Interop.Excel._Workbook oWB;
-        WebApiClientProvider RestClientProvider;
-        ManateeSerializer serializer;
+        //WebApiClientProvider RestClientProvider;
+        //ManateeSerializer serializer;
         string Tm;
         bool UpdtMspActls;
         bool UpdtMspKds;
@@ -52,7 +54,7 @@ namespace MspUpdate
 
 
 
-        public void CteReadBoard(
+        public async void CteReadBoard(
             string Prjct,
             string XlsTmpltPth,
             string XlsFlPth,
@@ -74,15 +76,13 @@ namespace MspUpdate
 
 
             // Manatee configuration
-            var serializer = new ManateeSerializer();
-            var JsonFactory = new ManateeFactory();
-            var RestClientProvider = new WebApiClientProvider();
-            TrelloConfiguration.JsonFactory = JsonFactory;
-            TrelloConfiguration.RestClientProvider = RestClientProvider;
-            TrelloConfiguration.Serializer = serializer;
-            TrelloConfiguration.Deserializer = serializer;
-            //TrelloConfiguration.JsonFactory = new ManateeFactory();
-            //TrelloConfiguration.RestClientProvider = new WebApiClientProvider();
+            //var serializer = new ManateeSerializer();
+            //var JsonFactory = new ManateeFactory();
+            //var RestClientProvider = new WebApiClientProvider();
+            //TrelloConfiguration.JsonFactory = JsonFactory;
+            //TrelloConfiguration.RestClientProvider = RestClientProvider;
+            //TrelloConfiguration.Serializer = serializer;
+            //TrelloConfiguration.Deserializer = serializer;
             TrelloAuthorization.Default.AppKey = Cnfg.TrlloAppKy;
             TrelloAuthorization.Default.UserToken = Cnfg.TrlloUsrTkn;
 
@@ -253,12 +253,14 @@ namespace MspUpdate
                     oShtKdsFrmTrllo.Cells[1, 8] = "Exceptions";
 
                     // Parse workitem cards for points
-                    TrelloParsePoints(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                    Task TskPrsPts = TrelloParsePoints(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg, TmStrt);
+                    TskPrsPts.Wait();
 
                     // Parse KD cards for KD info
                     if (UpdtMspKds)
                     {
-                        TrelloParseKds(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                        Task TskPrsKds = TrelloParseKds(Prjct, XlsTmpltPth, XlsFlPth, CnfgFlPth, Cnfg);
+                        TskPrsKds.Wait();
                     }
 
                     // Save workbook
@@ -289,7 +291,7 @@ namespace MspUpdate
 
         }
 
-        public void TrelloParsePoints (
+        public async Task TrelloParsePoints (
             string Prjct,
             string XlsTmpltPth,
             string XlsFlPth,
@@ -387,6 +389,10 @@ namespace MspUpdate
             {
                 // Board data elements
                 var Brd = new Board(BrdId);
+                await Brd.Refresh();
+                await Brd.Lists.Refresh();
+                await Brd.Cards.Refresh();
+
                 BrdNm = Brd.Name;
 
                 // Find Trello lists to be included and excluded.  Write them to xls exec tab.
@@ -767,7 +773,7 @@ namespace MspUpdate
 
         }
 
-        public void TrelloParseKds(
+        public async Task TrelloParseKds(
             string Prjct,
             string XlsTmpltPth,
             string XlsFlPth,
@@ -846,6 +852,10 @@ namespace MspUpdate
             {
                 // Board data elements
                 var KdBrd = new Board(KdBrdId);
+                await KdBrd.Refresh();
+                await KdBrd.Lists.Refresh();
+                await KdBrd.Cards.Refresh();
+
                 KdBrdNm = KdBrd.Name;
 
                 // Find Trello lists to be included and excluded.  Write them to xls exec tab.
