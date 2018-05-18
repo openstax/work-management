@@ -8,6 +8,7 @@ import zipfile
 SrcDrctry = "C:\\Users\\Bruce Pike Rice\\Documents\\Repos\\work-management\\"
 Trgt = SrcDrctry + "Deploy\\"
 InstllDrctry = "C:\\Users\\Bruce Pike Rice\\Documents\\bin\\MSP Update\\"
+VmShrDrctry = "C:\\Users\\Bruce Pike Rice\\Documents\\Virtual Machines\\Shared With VMs\\"
 
 # Copy release folder contents
 RlsFldr = SrcDrctry + "JiraInteraction\\bin\\Release\\"
@@ -29,5 +30,9 @@ shutil.copy(SrcDrctry + "deploy.zip", InstllDrctry)
 zip_ref = zipfile.ZipFile(InstllDrctry + "deploy.zip", 'r')
 zip_ref.extractall(InstllDrctry + "Deploy\\")
 zip_ref.close()
+
+# Copy deploy zip to VM share directory
+shutil.copy(SrcDrctry + "deploy.zip", VmShrDrctry)
+
 
 wait = input("All done - PRESS ENTER TO CONTINUE.")
