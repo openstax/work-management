@@ -78,6 +78,7 @@
     * LI and LE nonblank: Lists on LI are included, then lists on LE are excluded.
 
 **Obsolete Parameters**
+
 | Parameter | Description | Default | Required |
 | ---------- | --------------------------- | :--------: | :--------: |
 | Points/Hours | If Points then run points-based update. If Hours then run hours-based update (obsolete). | none | y |
