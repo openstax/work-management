@@ -1,64 +1,35 @@
 ---
-name: Template Bug
-about: Bug issue template
+name: Bug report
+about: Create a report to help us improve
 
 ---
 
-**SCENARIO** _Briefly describe the issue._
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-----------------
-**Steps to Reproduce the issue:** _Who, Where and How?_
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-- **Product:**
-- [ ] Accounts 
-- [ ] BigLearn
-- [ ] Exercises 
-- [ ] CNX
-- [ ] Tutor
-- [ ] Payments
-- [ ] Highlight 
-- [ ] Web
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-- **User Type:**
-- [ ] Admin  
-- [ ] Content/QA
-- [ ] Student  
-- [ ] Teacher
-- [ ] N/A
-- **Username:** 
-- **URL:**  
-- **Course number:**  
-- **Course type:**  
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
 
-- **Steps**
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
 
-----------------
-**Environment:**
-
-- **Instance:**
-- [ ] production 
-- [ ] qa 
-- [ ] staging
-- [ ] dev 
-- [ ] content 
-- [ ] demo
-- **OS:**
-- [ ] Mac OSX 
-- [ ] Windows
-- [ ] Android 
-- [ ] iOS
-- **Browser:**
-- [ ] Chrome 
-- [ ] Firefox 
-- [ ] Safari
-- [ ] Opera 
-- [ ] IE 
-- [ ] Edge
-- **Browser Version:**  
-
-----------------
-**Possible impact on a User:**
-
-----------------
-**Images or Screenshots** (_attach below_)
+**Additional context**
+Add any other context about the problem here.
