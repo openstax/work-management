@@ -4,4 +4,3 @@
 
 ## Program Documentation
 [MSP Update](https://openstax.github.io/work-management/msp-update-documentation)
-
